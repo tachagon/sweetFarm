@@ -1,0 +1,6 @@
+<% provide(:title, "Home") %>
+
+<div class="row">
+	<h1>This is Home page. <%=t :hello %></h1>
+	<%= link_to 'page2', page2_path(locale: I18n.locale) %>
+</div>
