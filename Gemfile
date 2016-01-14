@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
 
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.3.13'

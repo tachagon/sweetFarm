@@ -4,3 +4,11 @@
 	<h1>This is Home page. <%=t :hello %></h1>
 	<%= link_to 'page2', page2_path(locale: I18n.locale) %>
 </div>
+
+<%= fa_icon "camera-retro" %>
+
+<%= fa_stacked_icon "twitter", base: "square-o" %>
+
+<%= fa_stacked_icon "dollar inverse", base: "circle", class: "fa-5x" %>
+<br>
+<%= fa_stacked_icon "terminal inverse", base: "square", class: "pull-right", text: "Hi!" %>
