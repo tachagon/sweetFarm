@@ -8,12 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-	<%= link_to 'Eng', root_path(locale: 'en') %>
-	<%= link_to 'Thai', root_path(locale: 'th') %>
-</div>
+
+<%= render 'layouts/navbar' %>
+
 <div class="container-fluid">
-	<%= yield %>	
+	<%= yield %>
 </div>
 
 <div class="container">

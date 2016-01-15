@@ -21,7 +21,12 @@
 
 en:
   hello: "Hello world"
+  sign_up: "Sign up"
+  language: "English"
 
   static_pages:
     index:
       title: "Home"
+      jumbotron:
+        welcome: "Welcome"
+        content: "Contents ..."

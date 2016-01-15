@@ -1,6 +1,11 @@
 th:
   hello: "สวัสดี"
+  sign_up: "สมัครใช้งาน"
+  language: "ภาษาไทย"
 
   static_pages:
     index:
       title: "หน้าแรก"
+      jumbotron:
+        welcome: "ยินดีต้อนรับ"
+        content: "เนื้อหา ..."
