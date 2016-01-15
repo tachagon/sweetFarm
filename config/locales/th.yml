@@ -1,2 +1,6 @@
 th:
   hello: "สวัสดี"
+
+  static_pages:
+    index:
+      title: "หน้าแรก"
