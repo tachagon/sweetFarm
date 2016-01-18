@@ -1,6 +1,7 @@
 th:
   hello: "สวัสดี"
   sign_up: "สมัครใช้งาน"
+  sign_in: "ลงชื่อเข้าใช้"
   language: "ภาษาไทย"
 
   static_pages:
