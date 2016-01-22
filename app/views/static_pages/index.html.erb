@@ -1,13 +1,13 @@
-<% provide(:title, t('static_pages.index.title')) %>
+<% provide(:title, t('views.static_pages.index.title')) %>
 
 <div class="row">
 
   <div class="jumbotron">
     <div class="container">
-      <h1><%=t 'static_pages.index.jumbotron.welcome' %></h1>
-      <p><%=t 'static_pages.index.jumbotron.content' %></p>
+      <h1><%=t 'views.static_pages.index.jumbotron.welcome' %></h1>
+      <p><%=t 'views.static_pages.index.jumbotron.content' %></p>
       <p>
-        <a class="btn btn-primary btn-lg"><%=t 'sign_up' %></a>
+        <%= link_to t('sign_up'), new_user_path, class: "btn btn-primary btn-lg" %>
       </p>
     </div>
   </div>

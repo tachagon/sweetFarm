@@ -25,9 +25,20 @@ en:
   sign_in: "Sign in"
   language: "English"
 
-  static_pages:
-    index:
-      title: "Home"
-      jumbotron:
-        welcome: "Welcome"
-        content: "Contents ..."
+  views:
+    static_pages:
+      index:
+        title: "Home"
+        jumbotron:
+          welcome: "Welcome"
+          content: "Contents ..."
+    users:
+      new:
+        sign_up_with_email: "Sign up with email"
+        sign_up_with_facebook: "Sign up with Facebook"
+        sign_up_with_twitter: "Sign up with Twitter"
+
+  controllers:
+    users:
+      create:
+        success: "Welcome to the Sweet Farm App!"

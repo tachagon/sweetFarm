@@ -3,10 +3,46 @@ th:
   sign_up: "สมัครใช้งาน"
   sign_in: "ลงชื่อเข้าใช้"
   language: "ภาษาไทย"
+  error: "ข้อผิดพลาด"
 
-  static_pages:
-    index:
-      title: "หน้าแรก"
-      jumbotron:
-        welcome: "ยินดีต้อนรับ"
-        content: "เนื้อหา ..."
+  activerecord:
+    attributes:
+      user:
+        name: "ชื่อ และ นามสกุล"
+        email: "อีเมล"
+        password: "รหัสผ่าน"
+        password_confirmation: "ยืนยันรหัสผ่าน"
+        admin: "ผู้ดูแลระบบ"
+
+    errors:
+      messages:
+        blank: "ต้องระบุ"
+        invalid: "รูปแบบไม่ถูกต้อง"
+        too_short: "สั้นเกินไป"
+        too_long: "ยาวเกินไป"
+        confirmation: "การยืนยันไม่ถูกต้อง"
+        taken: "ถูกนำไปใช้แล้ว"
+
+      models:
+        user:
+          attributes:
+            email:
+              taken: "ไม่สามารถใช้ซ้ำได้"
+
+  views:
+    static_pages:
+      index:
+        title: "หน้าแรก"
+        jumbotron:
+          welcome: "ยินดีต้อนรับ"
+          content: "เนื้อหา ..."
+    users:
+      new:
+        sign_up_with_email: "สมัครใช้งานด้วยอีเมล"
+        sign_up_with_facebook: "สมัครใช้งานด้วย Facebook"
+        sign_up_with_twitter: "สมัครใช้งานด้วย Twitter"
+
+  controllers:
+    users:
+      create:
+        success: "ยินดีต้อนรับเข้าสู่ Sweet Farm!"
