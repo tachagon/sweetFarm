@@ -2,14 +2,22 @@
 <% provide(:user_form_button, t('sign_up')) %>
 
 <div class="row">
-  <div class="col-md-offset-1 col-md-4" id="sign_up_with_social">
-    <%= link_to t('views.users.new.sign_up_with_facebook'), '#', class: 'btn btn-default btn-lg btn-block' %>
-    <%= link_to t('views.users.new.sign_up_with_twitter'), '#', class: 'btn btn-default btn-lg btn-block' %>
+  <div class="col-md-4 col-md-offset-1">
+    <div class="list-group">
+      <a href="#" class="list-group-item">
+        <i class="fa fa-facebook-official fa-fw"></i> <%=t 'views.users.new.sign_up_with_facebook' %>
+      </a>
+
+      <a href="#" class="list-group-item">
+        <i class="fa fa-twitter-square fa-fw"></i> <%=t 'views.users.new.sign_up_with_twitter' %>
+      </a>
+    </div>
   </div>
 
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
+        <i class="fa fa-envelope-o"></i>
         <%=t 'views.users.new.sign_up_with_email' %>
       </div>
       <div class="panel-body">

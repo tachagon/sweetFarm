@@ -13,6 +13,9 @@ gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'font-awesome-rails'
 
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.3.13'
 # Use SCSS for stylesheets
