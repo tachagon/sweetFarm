@@ -2,13 +2,28 @@ Rails.application.routes.draw do
 
   scope "(:locale)", :locale => /en|th/ do
     root 'static_pages#index'
+
+    get 'login' => 'sessions#new'
+    post 'login' => 'sessions#create'
+    delete 'logout' => 'sessions#destroy'
+
     get 'page2' => 'static_pages#page2'
+
     resources :users
+  end
+  # resources :users
+  get 'auth/twitter',   as: 'login_twitter'
+  get 'auth/facebook',  as: 'login_facebook'
+  match 'auth/:provider/callback', to: 'static_pages#page2', via: [:get, :post]
+
+  get '/auth/failure' do
+    flash[:danger] = params[:message]
+    redirect '/'
   end
 
   # root 'static_pages#index'
   # get 'page2' => 'static_pages#page2'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

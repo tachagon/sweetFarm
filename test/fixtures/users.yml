@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tatchagon:
+  name: Tatchagon Koonkoei
+  email: o_k_t@hotmail.com
+  password_digest: <%= User.digest('password') %>
+  admin: true
+
+pasin:
+  name: Pasin Tongmanee
+  email: pasin_book@hotmail.com
+  password_digest: <%= User.digest('password') %>
