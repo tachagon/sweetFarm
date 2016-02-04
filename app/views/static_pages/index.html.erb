@@ -2,6 +2,10 @@
 
 <div class="row">
 
+  <% if logged_in? %>
+    <h1>เข้าสู่ระบบแล้ว</h1>
+  <% else %>
+
   <div class="jumbotron">
     <div class="container">
       <h1><%=t 'views.static_pages.index.jumbotron.welcome' %></h1>
@@ -14,6 +18,8 @@
   <!-- end jumbotron -->
 
 	<%= link_to 'page2', page2_path(locale: I18n.locale) %>
+
+  <% end %>
 </div>
 
 <%= fa_icon "camera-retro" %>

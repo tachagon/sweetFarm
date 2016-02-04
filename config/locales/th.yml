@@ -1,9 +1,14 @@
 th:
   hello: "สวัสดี"
+  please_login: "กรุณาลงชื่อเข้าใช้"
+  profile: "โปรไฟล์"
   sign_up: "สมัครใช้งาน"
-  sign_in: "ลงชื่อเข้าใช้"
+  # sign_in: "ลงชื่อเข้าใช้"
+  login: "ลงชื่อเข้าใช้"
+  logout: "ออกจากระบบ"
   language: "ภาษาไทย"
   error: "ข้อผิดพลาด"
+  remember_me: "จดจำฉัน"
 
   activerecord:
     attributes:
@@ -41,8 +46,20 @@ th:
         sign_up_with_email: "สมัครใช้งานด้วยอีเมล"
         sign_up_with_facebook: "สมัครใช้งานด้วย Facebook"
         sign_up_with_twitter: "สมัครใช้งานด้วย Twitter"
+    sessions:
+      new:
+        login_with_email: "ลงชื่อเข้าใช้ด้วยอีเมล"
+        login_with_facebook: "ลงชื่อเข้าใช้ด้วย Facebook"
+        login_with_twitter: "ลงชื่อเข้าใช้ด้วย Twitter"
+        error: "อีเมลหรือรหัสผ่านไม่ถูกต้อง"
+        new_user: "ผู้ใช้ใหม่ใช่หรือไม่?"
 
   controllers:
+    applications:
+      logged_in_user:
+        caution: "กรุณาลงชื่อเข้าใช้"
     users:
       create:
         success: "ยินดีต้อนรับเข้าสู่ Sweet Farm!"
+      show:
+        danger: "ไม่พบบัญชีผู้ใช้ที่ต้องการ"
