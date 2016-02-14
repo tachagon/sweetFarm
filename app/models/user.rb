@@ -11,6 +11,15 @@ class User < ActiveRecord::Base
     has_secure_password
     validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
+  def self.create_with_omniauth(auth)
+    User.create!(
+      name: auth["info"]["name"],
+      email: auth["info"]["email"],
+      password: "password",
+      password_confirmation: "password"
+    )
+  end
+
   # Returns the hash digest of the given string.
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
