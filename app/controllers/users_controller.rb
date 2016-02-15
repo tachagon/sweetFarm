@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(user_params.except!(:email))
       flash[:success] = t('controllers.users.update.success')
       redirect_to user_path(locale: I18n.locale)
     else

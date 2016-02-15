@@ -52,6 +52,7 @@ th:
         sign_up_with_google: "สมัครใช้งานด้วย Google"
       edit:
         update_profile: "แก้ไขโปรไฟล์"
+        save_changes: "บันทึกการเปลี่ยนแปลง"
     sessions:
       new:
         login_with_email: "ลงชื่อเข้าใช้ด้วยอีเมล"

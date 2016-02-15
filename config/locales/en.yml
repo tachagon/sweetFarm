@@ -45,6 +45,7 @@ en:
         sign_up_with_google: "Sign up with Google"
       edit:
         update_profile: "Update Your Profile"
+        save_changes: "Save changes"
     sessions:
       new:
         login_with_email: "Login with email"
