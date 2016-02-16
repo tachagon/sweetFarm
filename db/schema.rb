@@ -11,42 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215110709) do
-
-  create_table "amphur", primary_key: "AMPHUR_ID", force: :cascade do |t|
-    t.string  "AMPHUR_CODE", limit: 4,               null: false
-    t.string  "AMPHUR_NAME", limit: 150,             null: false
-    t.integer "GEO_ID",      limit: 4,   default: 0, null: false
-    t.integer "PROVINCE_ID", limit: 4,   default: 0, null: false
-  end
-
-  create_table "district", primary_key: "DISTRICT_ID", force: :cascade do |t|
-    t.string  "DISTRICT_CODE", limit: 6,               null: false
-    t.string  "DISTRICT_NAME", limit: 150,             null: false
-    t.integer "AMPHUR_ID",     limit: 4,   default: 0, null: false
-    t.integer "PROVINCE_ID",   limit: 4,   default: 0, null: false
-    t.integer "GEO_ID",        limit: 4,   default: 0, null: false
-  end
-
-  create_table "geographies", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "geography", primary_key: "GEO_ID", force: :cascade do |t|
-    t.string "GEO_NAME", limit: 255, null: false
-  end
-
-  create_table "province", primary_key: "PROVINCE_ID", force: :cascade do |t|
-    t.string  "PROVINCE_CODE", limit: 2,               null: false
-    t.string  "PROVINCE_NAME", limit: 150,             null: false
-    t.integer "GEO_ID",        limit: 4,   default: 0, null: false
-  end
-
-  create_table "provinces", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20160123081403) do
 
   create_table "single_sign_ons", force: :cascade do |t|
     t.string   "provider",   limit: 255
@@ -69,14 +34,6 @@ ActiveRecord::Schema.define(version: 20160215110709) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-
-  create_table "zipcode", primary_key: "ZIPCODE_ID", force: :cascade do |t|
-    t.string "DISTRICT_CODE", limit: 100, null: false
-    t.string "PROVINCE_ID",   limit: 100, null: false
-    t.string "AMPHUR_ID",     limit: 100, null: false
-    t.string "DISTRICT_ID",   limit: 100, null: false
-    t.string "ZIPCODE",       limit: 5,   null: false
-  end
 
   add_foreign_key "single_sign_ons", "users"
 end
