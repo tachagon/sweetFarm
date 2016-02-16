@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
 
     get 'page2' => 'static_pages#page2'
+    get 'settings' => 'static_pages#settings'
 
     resources :users
   end

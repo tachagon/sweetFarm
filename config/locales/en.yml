@@ -29,6 +29,7 @@ en:
   logout: "Logout"
   language: "English"
   remember_me: "Remember me on this computer"
+  settings: "Settings"
 # -------------------------------------------------------------------
   views:
     static_pages:
@@ -37,6 +38,8 @@ en:
         jumbotron:
           welcome: "Welcome"
           content: "Contents ..."
+      settings:
+        general: "General"
     users:
       new:
         sign_up_with_email: "Sign up with email"

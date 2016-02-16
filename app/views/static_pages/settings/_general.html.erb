@@ -1,9 +1,9 @@
-<% provide(:title, @user.name) %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t('views.static_pages.settings.general') %></h3>
+  </div>
+  <div class="panel-body">
 
-<h1 class="center"><%=t 'profile' %></h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
     <div class="table-responsive">
       <table class="table table-hover">
         <tr>
@@ -17,5 +17,7 @@
       </table>
     </div>
     <%= link_to t('views.users.edit.update_profile'), edit_user_path(id: current_user, locale: I18n.locale), class: "btn btn-default btn-block" %>
+
+  <!-- ./panel-body -->
   </div>
 </div>

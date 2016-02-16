@@ -9,6 +9,7 @@ th:
   language: "ภาษาไทย"
   error: "ข้อผิดพลาด"
   remember_me: "จดจำฉัน"
+  settings: "การตั้งค่า"
 # -------------------------------------------------------------------
   activerecord:
     attributes:
@@ -44,6 +45,8 @@ th:
         jumbotron:
           welcome: "ยินดีต้อนรับ"
           content: "เนื้อหา ..."
+      settings:
+        general: "ทั่วไป"
     users:
       new:
         sign_up_with_email: "สมัครใช้งานด้วยอีเมล"
