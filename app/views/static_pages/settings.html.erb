@@ -1,0 +1,43 @@
+<% provide(:title, t('settings')) %>
+
+<div class="row">
+
+<!-- left side menu -->
+  <div class="col-sm-3 col-md-3 col-md-offset-1">
+    <div class="list-group" role="tablist">
+      <a href="#general" class="list-group-item active" aria-controls="home" role="tab" data-toggle="tab"><%= t('views.static_pages.settings.general') %></a>
+      <a href="#test1" class="list-group-item" aria-controls="test1" role="tab" data-toggle="tab">test1</a>
+      <a href="#test2" class="list-group-item" aria-controls="test2" role="tab" data-toggle="tab">test2</a>
+      <a href="#test3" class="list-group-item" aria-controls="test3" role="tab" data-toggle="tab">test3</a>
+      <a href="#test4" class="list-group-item" aria-controls="test4" role="tab" data-toggle="tab">test4</a>
+      <a href="#test5" class="list-group-item" aria-controls="test5" role="tab" data-toggle="tab">test5</a>
+    </div>
+  </div>
+
+  <div class="col-sm-9 col-md-7">
+    <div class="tab-content">
+
+      <div role="tabpanel" class="tab-pane active" id="general">
+        <%= render partial: 'static_pages/settings/general' %>
+      </div>
+
+      <div class="tab-pane" role="tabpanel" id="test1">test1</div>
+      <div class="tab-pane" role="tabpanel" id="test2">test2</div>
+      <div class="tab-pane" role="tabpanel" id="test3">test3</div>
+      <div class="tab-pane" role="tabpanel" id="test4">test4</div>
+      <div class="tab-pane" role="tabpanel" id="test5">test5</div>
+
+    <!-- /.tab-content -->
+    </div>
+  </div>
+
+<!-- /.row -->
+</div>
+
+<script>
+  $('.list-group-item').click(function() {
+    $("a.list-group-item.active").removeClass("active");
+    console.log($("a.list-group-item.active"));
+    $(this).addClass("active");
+  });
+</script>

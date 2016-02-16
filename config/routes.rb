@@ -8,13 +8,15 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
 
     get 'page2' => 'static_pages#page2'
+    get 'settings' => 'static_pages#settings'
 
     resources :users
   end
   # resources :users
   get 'auth/twitter',   as: 'login_twitter'
   get 'auth/facebook',  as: 'login_facebook'
-  match 'auth/:provider/callback', to: 'static_pages#page2', via: [:get, :post]
+  get 'auth/google_oauth2', as: 'login_google'
+  match 'auth/:provider/callback', to: 'sessions#create_with_single_sign_on', via: [:get, :post]
 
   get '/auth/failure' do
     flash[:danger] = params[:message]

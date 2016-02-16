@@ -9,7 +9,8 @@ th:
   language: "ภาษาไทย"
   error: "ข้อผิดพลาด"
   remember_me: "จดจำฉัน"
-
+  settings: "การตั้งค่า"
+# -------------------------------------------------------------------
   activerecord:
     attributes:
       user:
@@ -21,19 +22,22 @@ th:
 
     errors:
       messages:
-        blank: "ต้องระบุ"
+        blank: "ต้องระบุข้อมูล"
         invalid: "รูปแบบไม่ถูกต้อง"
         too_short: "สั้นเกินไป"
         too_long: "ยาวเกินไป"
         confirmation: "การยืนยันไม่ถูกต้อง"
         taken: "ถูกนำไปใช้แล้ว"
+        record_invalid: "ข้อมูลไม่ถูกต้อง"
 
       models:
         user:
           attributes:
             email:
-              taken: "ไม่สามารถใช้ซ้ำได้"
-
+              taken: "นี้ถูกใช้ไปแล้ว"
+            password_confirmation:
+              confirmation: "ไม่ถูกต้อง"
+# -------------------------------------------------------------------
   views:
     static_pages:
       index:
@@ -41,19 +45,26 @@ th:
         jumbotron:
           welcome: "ยินดีต้อนรับ"
           content: "เนื้อหา ..."
+      settings:
+        general: "ทั่วไป"
     users:
       new:
         sign_up_with_email: "สมัครใช้งานด้วยอีเมล"
         sign_up_with_facebook: "สมัครใช้งานด้วย Facebook"
         sign_up_with_twitter: "สมัครใช้งานด้วย Twitter"
+        sign_up_with_google: "สมัครใช้งานด้วย Google"
+      edit:
+        update_profile: "แก้ไขโปรไฟล์"
+        save_changes: "บันทึกการเปลี่ยนแปลง"
     sessions:
       new:
         login_with_email: "ลงชื่อเข้าใช้ด้วยอีเมล"
         login_with_facebook: "ลงชื่อเข้าใช้ด้วย Facebook"
         login_with_twitter: "ลงชื่อเข้าใช้ด้วย Twitter"
+        login_with_google: "ลงชื่อเข้าใช้ด้วย Google"
         error: "อีเมลหรือรหัสผ่านไม่ถูกต้อง"
         new_user: "ผู้ใช้ใหม่ใช่หรือไม่?"
-
+# -------------------------------------------------------------------
   controllers:
     applications:
       logged_in_user:
@@ -61,5 +72,7 @@ th:
     users:
       create:
         success: "ยินดีต้อนรับเข้าสู่ Sweet Farm!"
+      update:
+        success: "อัฟเดทโปรไฟล์ของคุณเรียบร้อยแล้ว"
       show:
         danger: "ไม่พบบัญชีผู้ใช้ที่ต้องการ"

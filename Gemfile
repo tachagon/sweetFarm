@@ -15,6 +15,7 @@ gem 'font-awesome-rails'
 
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.3.13'
