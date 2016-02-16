@@ -6,4 +6,5 @@ class Amphur < ActiveRecord::Base
   belongs_to :province, foreign_key: "PROVINCE_ID"
 
   has_many :districts, foreign_key: "AMPHUR_ID", primary_key: "AMPHUR_ID"
+  has_many :zipcodes, foreign_key: "AMPHUR_ID", primary_key: "AMPHUR_ID"
 end
