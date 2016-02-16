@@ -1,0 +1,16 @@
+<% provide(:title, @user.name) %>
+<% provide(:user_form_button, t('views.users.edit.save_changes')) %>
+
+<h1 class="center"><%=t 'views.users.edit.update_profile' %></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for @user, url: user_path(@user.id, locale: I18n.locale) do |f| %>
+      <%= render partial: 'form', locals: {f: f} %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $("#user_email").prop("disabled", true);
+</script>
