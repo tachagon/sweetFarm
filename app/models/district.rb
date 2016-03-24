@@ -7,4 +7,5 @@ class District < ActiveRecord::Base
   belongs_to :amphur, foreign_key: "AMPHUR_ID"
 
   has_many :zipcodes, foreign_key: "DISTRICT_ID", primary_key: "DISTRICT_ID"
+  has_many :sales, dependent: :destroy
 end

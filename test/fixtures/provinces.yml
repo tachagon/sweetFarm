@@ -4,3 +4,9 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+
+kanchanaburi:
+  PROVINCE_ID: 56
+  PROVINCE_CODE: 71
+  PROVINCE_NAME: กาญจนบุรี
+  GEO_ID: 4

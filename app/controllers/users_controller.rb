@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :not_logged_in_user, only: [:new, :create]
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy, :update_role]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:index, :destroy]
+  before_action :admin_user, only: [:index, :destroy, :update_role]
 
   def index
-
+    @users = User.all
   end
 
   def show
@@ -45,6 +45,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_role
+    @user = User.find_by_id(params[:user_id])
+    if @user.update_attributes(user_role_params)
+      flash[:success] = 'อัปเดทสำเร็จ'
+      redirect_to users_path(locale: I18n.locale)
+    else
+      render 'index'
+    end
+  end
+
   def destroy
 
   end
@@ -53,6 +63,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def user_role_params
+      params.permit(:role)
     end
 
     # before filters

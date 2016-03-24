@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
+  after_initialize :set_default_role, if: :new_record?
+
   has_many :single_sign_ons, dependent: :destroy
+  has_many :sales, dependent: :destroy
+
   attr_accessor :remember_token
 
   before_save {email.downcase!}
@@ -10,6 +14,13 @@ class User < ActiveRecord::Base
         uniqueness: {case_sensitive: false}
     has_secure_password
     validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+
+  def self.all_role ; %w[user cane_planter head_cane_planter factory] ; end
+  validates :role, presence: true, inclusion: {in: User.all_role}
+
+  def set_default_role
+    self.role ||= 'user'
+  end
 
   def self.create_with_omniauth(auth)
     User.create!(

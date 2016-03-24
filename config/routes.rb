@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     get 'page2' => 'static_pages#page2'
     get 'settings' => 'static_pages#settings'
 
-    resources :users
+    get 'menu/admin' => 'static_pages#menu_admin'
+
+    resources :users do
+      post 'update_role' => 'users#update_role'
+    end
   end
   # resources :users
   get 'auth/twitter',   as: 'login_twitter'

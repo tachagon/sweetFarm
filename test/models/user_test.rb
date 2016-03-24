@@ -7,7 +7,8 @@ class UserTest < ActiveSupport::TestCase
       name: "Example User",
       email: "user@example.com",
       password: "foobar",
-      password_confirmation: "foobar")
+      password_confirmation: "foobar",
+      role: 'user')
   end
 
   test "should be valid" do
@@ -76,6 +77,33 @@ class UserTest < ActiveSupport::TestCase
 
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?('')
+  end
+
+  test "role should be user or cane_planter or head_cane_planter or factory" do
+    @user.role = 'user'
+    assert @user.valid?
+
+    @user.role = 'cane_planter'
+    assert @user.valid?
+
+    @user.role = 'head_cane_planter'
+    assert @user.valid?
+
+    @user.role = 'factory'
+    assert @user.valid?
+
+    @user.role = 'invalid role'
+    assert_not @user.valid?
+  end
+
+  test "role should be presence" do
+    @user.role = ''
+    assert_not @user.valid?
+  end
+
+  test "role should default be user" do
+    @user.save
+    assert_equal(@user.role, 'user')
   end
 
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+active:
+  name: active
+
+expired:
+  name: expired
+
+trade:
+  name: trade
+
+success:
+  name: success
+
+fail:
+  name: fail

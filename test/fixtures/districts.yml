@@ -5,3 +5,10 @@
 # below each fixture, per the syntax in the comments below
 #
 
+banmai:
+  DISTRICT_ID: 7069
+  DISTRICT_CODE: 710609
+  DISTRICT_NAME: บ้านใหม่
+  AMPHUR_ID: 787
+  PROVINCE_ID: 56
+  GEO_ID: 4

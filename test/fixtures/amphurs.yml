@@ -5,3 +5,9 @@
 # below each fixture, per the syntax in the comments below
 #
 
+thamuang:
+  AMPHUR_ID: 787
+  AMPHUR_CODE: 7106
+  AMPHUR_NAME: ท่าม่วง
+  GEO_ID: 4
+  PROVINCE_ID: 56
