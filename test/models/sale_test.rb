@@ -4,15 +4,15 @@ class SaleTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:tatchagon)
-    @sale_status = sale_statuses(:active)
+    # @sale_status = sale_statuses(:active)
     @district = districts(:banmai)
 
     @sale = Sale.new(
         amount: 50,
         price: 1000,
         district: @district,
-        user: @user,
-        sale_status: @sale_status
+        user: @user
+        # sale_status: @sale_status
       )
   end
 
@@ -52,6 +52,11 @@ class SaleTest < ActiveSupport::TestCase
     assert @sale.valid?
   end
 
+  test "expire should be present" do
+    @sale.expire = nil
+    assert_not @sale.valid?
+  end
+
   test "expire should be default is next 7 days" do
     next_7_day = Time.now + 7.days
     @sale.save
@@ -60,6 +65,21 @@ class SaleTest < ActiveSupport::TestCase
     assert_equal(next_7_day.year, @sale.expire.year)
     assert_equal(next_7_day.hour, @sale.expire.hour)
     assert_equal(next_7_day.min, @sale.expire.min)
+  end
+
+  test "sale status should be default is active" do
+    @sale.save
+    assert_equal(@sale.sale_status.name, 'active')
+  end
+
+  test "sale status should be present" do
+    @sale.sale_status = nil
+    assert_not @sale.valid?
+  end
+
+  test "show should be present" do
+    @sale.show = nil
+    assert_not @sale.valid?
   end
 
   test "show should be default is true" do

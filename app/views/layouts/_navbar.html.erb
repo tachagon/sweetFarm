@@ -42,7 +42,7 @@
 
               <% if current_user.admin? %>
                 <li>
-                  <a href="<%= menu_admin_path(locale: I18n.locale) %>">
+                  <a href="<%= admin_menu_path(locale: I18n.locale) %>">
                     <i class="fa fa-lock"></i> <%=t 'activerecord.attributes.user.admin' %>
                   </a>
                 </li>

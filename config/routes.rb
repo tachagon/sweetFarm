@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope "(:locale)", :locale => /en|th/ do
+  # scope "(:locale)", :locale => /en|th/ do
     root 'static_pages#index'
 
     get 'login' => 'sessions#new'
@@ -10,12 +10,16 @@ Rails.application.routes.draw do
     get 'page2' => 'static_pages#page2'
     get 'settings' => 'static_pages#settings'
 
-    get 'menu/admin' => 'static_pages#menu_admin'
+    get 'admin/menu' => 'admin#menu'
+    get 'admin/all_sales' => 'admin#all_sales'
 
     resources :users do
       post 'update_role' => 'users#update_role'
+
+      resources :sales
     end
-  end
+
+  # end
   # resources :users
   get 'auth/twitter',   as: 'login_twitter'
   get 'auth/facebook',  as: 'login_facebook'
