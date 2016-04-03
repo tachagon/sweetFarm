@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324085420) do
+ActiveRecord::Schema.define(version: 20160401080612) do
 
   create_table "amphur", primary_key: "AMPHUR_ID", force: :cascade do |t|
     t.string  "AMPHUR_CODE", limit: 4,               null: false
@@ -19,6 +19,21 @@ ActiveRecord::Schema.define(version: 20160324085420) do
     t.integer "GEO_ID",      limit: 4,   default: 0, null: false
     t.integer "PROVINCE_ID", limit: 4,   default: 0, null: false
   end
+
+  create_table "announcements", force: :cascade do |t|
+    t.float    "amount",      limit: 24
+    t.float    "price",       limit: 24
+    t.string   "role",        limit: 255
+    t.datetime "expire"
+    t.boolean  "show",                    default: true
+    t.integer  "user_id",     limit: 4
+    t.integer  "district_id", limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "announcements", ["district_id"], name: "index_announcements_on_district_id", using: :btree
+  add_index "announcements", ["user_id"], name: "index_announcements_on_user_id", using: :btree
 
   create_table "district", primary_key: "DISTRICT_ID", force: :cascade do |t|
     t.string  "DISTRICT_CODE", limit: 6,               null: false
@@ -79,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160324085420) do
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
     t.string   "role",            limit: 255
+    t.string   "picture",         limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -91,6 +107,7 @@ ActiveRecord::Schema.define(version: 20160324085420) do
     t.string "ZIPCODE",       limit: 5,   null: false
   end
 
+  add_foreign_key "announcements", "users"
   add_foreign_key "sales", "sale_statuses"
   add_foreign_key "sales", "users"
   add_foreign_key "single_sign_ons", "users"

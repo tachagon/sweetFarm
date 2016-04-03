@@ -1,9 +1,16 @@
 <% provide(:title, t('views.static_pages.index.title')) %>
 
-<div class="row">
-
   <% if logged_in? %>
-    <h1>เข้าสู่ระบบแล้ว</h1>
+    <div class="jumbotron" id="jumbotron-attraction">
+      <div class="container">
+        <h1>ระบบแรงดึงดูด</h1>
+        <p>จัดการอ้อยด้วยปลายนิ้ว</p>
+        <p>
+          <a class="btn btn-primary btn-lg">ซื้ออ้อย</a>
+          <a href="<%= new_user_sale_path(current_user) %>" class="btn btn-warning btn-lg">ขายอ้อย</a>
+        </p>
+      </div>
+    </div>
   <% else %>
 
   <div class="jumbotron">
@@ -20,12 +27,4 @@
 	<%= link_to 'page2', page2_path(locale: I18n.locale) %>
 
   <% end %>
-</div>
 
-<%= fa_icon "camera-retro" %>
-
-<%= fa_stacked_icon "twitter", base: "square-o" %>
-
-<%= fa_stacked_icon "dollar inverse", base: "circle", class: "fa-5x" %>
-<br>
-<%= fa_stacked_icon "terminal inverse", base: "square", class: "pull-right", text: "Hi!" %>

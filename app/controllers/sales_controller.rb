@@ -6,7 +6,7 @@ class SalesController < ApplicationController
 
   def index
     @user = User.find_by_id(params[:user_id])
-    @sales = @user.sales
+    @sales = @user.sales.order('updated_at DESC')
   end
 
   def show

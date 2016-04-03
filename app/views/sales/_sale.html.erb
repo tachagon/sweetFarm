@@ -1,0 +1,32 @@
+<div class="col-md-12">
+  <a href="#" title="ดูข้อมูล" id="show-sale-link">
+    <div class="panel panel-default sale-item">
+      <div class="panel-body">
+
+        <table class="table table-hover">
+          <tr>
+            <th>ประกาศเลขที่</th>
+            <td><%= sale.id %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>จำนวนอ้อย</th>
+            <td><%= number_with_delimiter(sale.amount, delimiter: ',') %></td>
+            <td>ตัน</td>
+          </tr>
+          <tr>
+            <th>ราคา</th>
+            <td><%= number_with_delimiter(sale.price, delimiter: ',') %></td>
+            <td>บาท / ตัน</td>
+          </tr>
+          <tr>
+            <th>ราคารวม</th>
+            <td><%= number_with_delimiter(sale.amount * sale.price, delimiter: ',') %></td>
+            <td>บาท</td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </a>
+</div>

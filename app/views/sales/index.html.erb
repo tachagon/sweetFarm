@@ -1,0 +1,40 @@
+<% provide(:title, 'ระบบขายอ้อย') %>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li>
+      <%= link_to 'หน้าแรก', root_path %>
+    </li>
+    <li class="active">ระบบขายอ้อย</li>
+  </ol>
+
+  <div class="page-header">
+    <h1>ระบบขายอ้อย<small> <%= @sales.count %> ประกาศ</small></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">ผู้ประกาศ</div>
+        <div class="panel-body">
+          <%= @user.name %>
+          <% if @user == current_user %>
+            <div class="right">
+              <a href="<%= edit_user_path(current_user) %>">แก้ไขโปรไฟล์</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <%= render partial: 'sale', collection: @sales %>
+    </div>
+  </div>
+
+  <div class="add-sale">
+    <a href="<%= new_user_sale_path(current_user) %>" title="เพิ่มประกาศขายอ้อย" class="add-sale">
+      <i class="fa fa-plus-circle fa-4x plus-add-sale"></i>
+    </a>
+  </div>
+</div>

@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :single_sign_ons, dependent: :destroy
   has_many :sales, dependent: :destroy
+  has_many :announcements, dependent: :destroy
 
   attr_accessor :remember_token
 
@@ -16,7 +17,10 @@ class User < ActiveRecord::Base
     validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
   def self.all_role ; %w[user cane_planter head_cane_planter factory] ; end
-  validates :role, presence: true, inclusion: {in: User.all_role}
+  validates :role, presence: true, inclusion: {in: User.all_role}, allow_nil: true
+
+  mount_uploader :picture, PictureUploader
+  validate :picture_size
 
   def set_default_role
     self.role ||= 'user'
@@ -59,5 +63,12 @@ class User < ActiveRecord::Base
   def forget
       update_attribute(:remember_digest, nil)
   end
+
+  private
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, 'ขนาดภาพต้องไม่เกิน 5 MB')
+      end
+    end
 
 end

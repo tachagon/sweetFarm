@@ -19,6 +19,15 @@ th:
         password: "รหัสผ่าน"
         password_confirmation: "ยืนยันรหัสผ่าน"
         admin: "ผู้ดูแลระบบ"
+        picture: "ภาพโปรไฟล์"
+      sale:
+        amount: "จำนวนอ้อย"
+        price: "ราคาอ้อย"
+        district_id: "ตำบล"
+        user: "ผู้ใช้"
+        expire: "วันหมดอายุประกาศ"
+        sale_status: "สถานะประกาศ"
+        show: "สถานะการแสดงผล"
 
     errors:
       messages:
@@ -29,6 +38,7 @@ th:
         confirmation: "การยืนยันไม่ถูกต้อง"
         taken: "ถูกนำไปใช้แล้ว"
         record_invalid: "ข้อมูลไม่ถูกต้อง"
+        not_a_number: "ต้องเป็นตัวเลข"
 
       models:
         user:

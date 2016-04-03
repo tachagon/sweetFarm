@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     get 'admin/menu' => 'admin#menu'
     get 'admin/all_sales' => 'admin#all_sales'
+    get 'admin/all_announcements' => 'admin#all_announcements'
 
     resources :users do
       post 'update_role' => 'users#update_role'
@@ -19,8 +20,17 @@ Rails.application.routes.draw do
       resources :sales
     end
 
+    resources :announcements
+
   # end
   # resources :users
+
+  resources :provinces do
+    resources :amphurs, only: [:index] do
+      resources :districts, only: [:index]
+    end
+  end
+
   get 'auth/twitter',   as: 'login_twitter'
   get 'auth/facebook',  as: 'login_facebook'
   get 'auth/google_oauth2', as: 'login_google'

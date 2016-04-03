@@ -8,4 +8,5 @@ class District < ActiveRecord::Base
 
   has_many :zipcodes, foreign_key: "DISTRICT_ID", primary_key: "DISTRICT_ID"
   has_many :sales, dependent: :destroy
+  has_many :announcements, dependent: :destroy
 end
