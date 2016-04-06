@@ -51,9 +51,24 @@ class AnnouncementsControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
-  test "should render new when logged in" do
+  test "should redirect new when not have role params" do
     log_in_as(@user)
     get :new
+    assert_redirected_to announcements_url
+  end
+
+  test "should redirect new when logged in and invalid role params" do
+    log_in_as(@user)
+    get :new, role: 'invalid'
+    assert_redirected_to announcements_url
+  end
+
+  test "should render new when logged in and valid role params" do
+    log_in_as(@user)
+    get :new, role: 'sale'
+    assert_template 'announcements/new'
+
+    get :new, role: 'purchase'
     assert_template 'announcements/new'
   end
 
@@ -182,10 +197,18 @@ class AnnouncementsControllerTest < ActionController::TestCase
       district_id: @banmai.id
     }
 
+    next_week = Time.now + 7.days
     @announcement.reload
     assert_redirected_to announcement_url(@announcement)
     assert_equal(@announcement.amount, amount)
     assert_equal(@announcement.price, price)
+
+    # check auto incretment expire 1 week
+    assert_equal(@announcement.expire.day, next_week.day)
+    assert_equal(@announcement.expire.month, next_week.month)
+    assert_equal(@announcement.expire.year, next_week.year)
+    assert_equal(@announcement.expire.hour, next_week.hour)
+    assert_equal(@announcement.expire.min, next_week.min)
 end
 
 #=============================================================

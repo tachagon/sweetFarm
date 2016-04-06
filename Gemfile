@@ -73,4 +73,4 @@ group :production do
   gem 'rails_12factor', '0.0.2'
 end
 
-gem 'puma'
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"

@@ -28,6 +28,14 @@ th:
         expire: "วันหมดอายุประกาศ"
         sale_status: "สถานะประกาศ"
         show: "สถานะการแสดงผล"
+      announcement:
+        amount: 'จำนวนอ้อย'
+        price: 'ราคาอ้อย'
+        role: 'ประเภทของประกาศ'
+        expire: 'วันหมดอายุประกาศ'
+        show: 'สถานะการแสดงผล'
+        user: 'ผู้ใช้'
+        district_id: 'ตำบล'
 
     errors:
       messages:

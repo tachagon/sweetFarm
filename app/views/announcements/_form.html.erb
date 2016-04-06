@@ -1,0 +1,43 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="form-group">
+  <%= f.label :amount %>
+  <div class="input-group">
+    <%= number_field :announcement, :amount, min: 1, class: 'form-control', onchange: 'show_result()' %>
+    <div class="input-group-addon">ตัน</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :price %>
+  <div class="input-group">
+    <%= number_field :announcement, :price, min: 1, class: 'form-control', onchange: 'show_result()' %>
+    <div class="input-group-addon">บาท / ตัน</div>
+  </div>
+  <span class="help-block" id="result-price">ราคารวม 0 บาท</span>
+</div>
+
+<%= f.text_field :role, value: @role %>
+
+<div class="form-group">
+  <div class="form-control-static">
+    เลือกพื้นที่
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :province, "จังหวัด" %>
+  <select name="province" class="form-control" id="announcement_province"></select>
+</div>
+
+<div class="form-group">
+  <%= f.label :amphur, "อำเภอ" %>
+  <select name="amphur" class="form-control", id="announcement_amphur"></select>
+</div>
+
+<div class="form-group">
+  <%= f.label :district_id, "ตำบล" %>
+  <%= f.select :district_id, [], {}, {class: 'form-control'} %>
+</div>
+
+<%= f.submit "เพิ่มประกาศใหม่", class: 'btn btn-primary btn-block' %>

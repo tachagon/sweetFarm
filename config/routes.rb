@@ -31,6 +31,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'district' => 'districts#show'
+  get 'districtamphur' => 'districts#show_amphur'
+  get 'districtprovince' => 'districts#show_province'
+
   get 'auth/twitter',   as: 'login_twitter'
   get 'auth/facebook',  as: 'login_facebook'
   get 'auth/google_oauth2', as: 'login_google'

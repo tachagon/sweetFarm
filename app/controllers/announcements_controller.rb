@@ -5,10 +5,14 @@ class AnnouncementsController < ApplicationController
   before_action :admin_user, only: [:destroy]
 
   def index
-    @announcements = Announcement.order('updated_at DESC')
+    @announcements = Announcement.show.not_expired.recent
+    # @announcements = Announcement.other_user(current_user.id).recent
+    @announcements = Announcement.recent.user(params[:user_id]) if params[:user_id]
+    @announcements = Announcement.recent.user(params[:user_id]).role(params[:role]) if params[:user_id] && params[:role]
     respond_to do |format|
       format.html
       format.json{render json: @announcements}
+      format.xml{render xml: @announcements}
     end
   end
 
@@ -17,7 +21,12 @@ class AnnouncementsController < ApplicationController
   end
 
   def new
-    @announcement = current_user.announcements.build
+    if %w[sale purchase].include?(params[:role])
+      @announcement = current_user.announcements.build
+      @role = params[:role]
+    else
+      redirect_to announcements_path
+    end
   end
 
   def create
@@ -26,6 +35,7 @@ class AnnouncementsController < ApplicationController
       flash[:success] = 'ประกาศสำเร็จ'
       redirect_to announcement_path(@announcement)
     else
+      @role = params[:announcement][:role]
       render 'new'
     end
   end
@@ -37,6 +47,8 @@ class AnnouncementsController < ApplicationController
   def update
     @announcement = Announcement.find_by_id(params[:id])
     if @announcement.update_attributes(announcement_params)
+      @announcement.expire = Time.now + 7.days
+      @announcement.save!
       flash[:success] = 'แก้ไขข้อมูลสำเร็จแล้ว'
       redirect_to announcement_path(@announcement)
     else

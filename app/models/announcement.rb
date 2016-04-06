@@ -14,4 +14,11 @@ class Announcement < ActiveRecord::Base
   validates :district_id, presence: true
 
   def set_default_expire ; self.expire ||= Time.now + 7.days ; end
+
+  scope :not_expired, -> {where('expire >= NOW()')}
+  scope :show, -> {where(show: true)}
+  scope :recent, -> {order('updated_at DESC')}
+  scope :user, -> (user_id){where(user: user_id)}
+  scope :other_user, -> (user_id){where("user_id != #{user_id}")}
+  scope :role, -> (role){where(role: role)}
 end

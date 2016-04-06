@@ -44,6 +44,27 @@ body {
   text-align: center;
 }
 
+.announcement-card {
+  &:hover {
+    box-shadow: 1px 1px 5px black;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+#announcement-role-sale {
+  color: orange;
+}
+
+#announcement-role-purchase {
+  color: blue;
+}
+
+#announcement-result-price {
+  color: green;
+}
+
 // sales -------------------------------------------------------------------------
 .add-sale {
   position: fixed;

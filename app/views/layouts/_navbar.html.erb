@@ -17,13 +17,23 @@
       <% if logged_in? %>
 
         <ul class="nav navbar-nav">
+
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ระบบขายอ้อย <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle='dropdown'>ระบบซื้ออ้อย <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><%= link_to 'ประกาศทั้งหมด', user_sales_path(current_user) %></li>
-              <li><%= link_to 'เพิ่มประกาศใหม่', new_user_sale_path(current_user) %></li>
+              <li><%= link_to 'ประกาศของฉัน', announcements_path(user_id: current_user, role: 'purchase') %></li>
+              <li><%= link_to 'เพิ่มประกาศใหม่', new_announcement_path(role: 'purchase') %></li>
             </ul>
           </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle='dropdown'>ระบบขายอ้อย <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'ประกาศของฉัน', announcements_path(user_id: current_user, role: 'sale') %></li>
+              <li><%= link_to 'เพิ่มประกาศใหม่', new_announcement_path(role: 'sale') %></li>
+            </ul>
+          </li>
+
         </ul>
 
       <% end %>
