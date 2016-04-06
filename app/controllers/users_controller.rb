@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :not_logged_in_user, only: [:new, :create]
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy, :update_role]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:index, :destroy]
+  before_action :admin_user, only: [:index, :destroy, :update_role]
 
   def index
-
+    @users = User.all
   end
 
   def show
@@ -45,6 +45,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_role
+    @user = User.find_by_id(params[:user_id])
+    if @user.update_attributes(user_role_params)
+      flash[:success] = 'อัปเดทสำเร็จ'
+      redirect_to users_path(locale: I18n.locale)
+    else
+      render 'index'
+    end
+  end
+
   def destroy
 
   end
@@ -52,35 +62,17 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :picture)
     end
 
-    # before filters
-
-    # Confirms a logged-in user.
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = t('please_login')
-        redirect_to login_url
-      end
-    end
-
-    def not_logged_in_user
-      if logged_in?
-        redirect_to root_path
-      end
+    def user_role_params
+      params.permit(:role)
     end
 
     # Confirms the correct user.
     def correct_user
       @user = User.find_by_id(params[:id])
       redirect_to(root_url) unless current_user?(@user)
-    end
-
-    # Confirms an admin user.
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
 
 end

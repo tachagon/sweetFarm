@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope "(:locale)", :locale => /en|th/ do
+  # scope "(:locale)", :locale => /en|th/ do
     root 'static_pages#index'
 
     get 'login' => 'sessions#new'
@@ -10,9 +10,31 @@ Rails.application.routes.draw do
     get 'page2' => 'static_pages#page2'
     get 'settings' => 'static_pages#settings'
 
-    resources :users
-  end
+    get 'admin/menu' => 'admin#menu'
+    get 'admin/all_sales' => 'admin#all_sales'
+    get 'admin/all_announcements' => 'admin#all_announcements'
+
+    resources :users do
+      post 'update_role' => 'users#update_role'
+
+      resources :sales
+    end
+
+    resources :announcements
+
+  # end
   # resources :users
+
+  resources :provinces do
+    resources :amphurs, only: [:index] do
+      resources :districts, only: [:index]
+    end
+  end
+
+  get 'district' => 'districts#show'
+  get 'districtamphur' => 'districts#show_amphur'
+  get 'districtprovince' => 'districts#show_province'
+
   get 'auth/twitter',   as: 'login_twitter'
   get 'auth/facebook',  as: 'login_facebook'
   get 'auth/google_oauth2', as: 'login_google'

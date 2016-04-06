@@ -14,10 +14,29 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
-      <ul class="nav navbar-nav">
-        <!-- <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li> -->
-      </ul>
+      <% if logged_in? %>
+
+        <ul class="nav navbar-nav">
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle='dropdown'>ระบบซื้ออ้อย <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'ประกาศของฉัน', announcements_path(user_id: current_user, role: 'purchase') %></li>
+              <li><%= link_to 'เพิ่มประกาศใหม่', new_announcement_path(role: 'purchase') %></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle='dropdown'>ระบบขายอ้อย <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'ประกาศของฉัน', announcements_path(user_id: current_user, role: 'sale') %></li>
+              <li><%= link_to 'เพิ่มประกาศใหม่', new_announcement_path(role: 'sale') %></li>
+            </ul>
+          </li>
+
+        </ul>
+
+      <% end %>
 
       <!-- <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -30,7 +49,10 @@
         <% if logged_in? %>
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @current_user.name %> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <%= image_tag @current_user.picture.url, id: 'nav-user-picture' %>
+              <%= @current_user.name %> <b class="caret"></b>
+            </a>
             <ul class="dropdown-menu">
               <li><%= link_to t('profile'), user_path(id: @current_user, locale: I18n.locale) %></li>
 
@@ -42,7 +64,7 @@
 
               <% if current_user.admin? %>
                 <li>
-                  <a href="#">
+                  <a href="<%= admin_menu_path(locale: I18n.locale) %>">
                     <i class="fa fa-lock"></i> <%=t 'activerecord.attributes.user.admin' %>
                   </a>
                 </li>

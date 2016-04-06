@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 30.times do |n| %>
+sale_<%= n %>:
+  amount: 50
+  price: 900
+  district_id: 7069
+  user: tatchagon
+  expire: <%= Time.now + 7.days %>
+  sale_status: active
+  show: true
+<% end %>
+
+

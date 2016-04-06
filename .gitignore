@@ -13,3 +13,6 @@
 /tmp
 
 omniauth.rb
+
+# Ignore uploaded test images.
+/public/uploads

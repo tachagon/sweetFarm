@@ -1,0 +1,27 @@
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td>
+      <%= form_tag(user_update_role_path(user, locale: I18n.locale), method: :post) do %>
+
+        <%= select_tag :role, options_for_select(['user', 'cane_planter', 'head_cane_planter', 'factory'], user.role) %>
+        <%= submit_tag 'Edit Role' %>
+
+      <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

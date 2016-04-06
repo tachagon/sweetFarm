@@ -7,15 +7,25 @@
     <div class="table-responsive">
       <table class="table table-hover">
         <tr>
+          <th><%=t 'activerecord.attributes.user.picture' %></th>
+          <td><%= image_tag @user.picture.url, id: 'show-user-picture' %></td>
+        </tr>
+        <tr>
           <th><%=t 'activerecord.attributes.user.name' %></th>
-          <td><%= current_user.name %></td>
+          <td><%= @user.name %></td>
         </tr>
         <tr>
           <th><%=t 'activerecord.attributes.user.email' %></th>
-          <td><%= current_user.email %></td>
+          <td><%= @user.email %></td>
         </tr>
       </table>
     </div>
-    <%= link_to t('views.users.edit.update_profile'), edit_user_path(id: current_user, locale: I18n.locale), class: "btn btn-default btn-block" %>
+
+    <% if current_user?(@user) %>
+      <a href="<%= edit_user_path(id: current_user, locale: I18n.locale) %>" title="แก้ไขโปรไฟล์" class="btn btn-default btn-block">
+        <i class="fa fa-pencil"></i> <%=t 'views.users.edit.update_profile' %>
+      </a>
+    <% end %>
+
   </div>
 </div>

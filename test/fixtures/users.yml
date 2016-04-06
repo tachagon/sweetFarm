@@ -5,8 +5,10 @@ tatchagon:
   email: o_k_t@hotmail.com
   password_digest: <%= User.digest('password') %>
   admin: true
+  role: user
 
 pasin:
   name: Pasin Tongmanee
   email: pasin_book@hotmail.com
   password_digest: <%= User.digest('password') %>
+  role: user

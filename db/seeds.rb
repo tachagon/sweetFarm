@@ -13,3 +13,9 @@ admin = User.create!(
   password_confirmation: "123456",
   admin: true
 )
+
+all_sale_status = ['active', 'expired', 'trade', 'success', 'fail']
+
+all_sale_status.each do |name|
+  SaleStatus.create(name: name)
+end

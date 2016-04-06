@@ -12,7 +12,7 @@
 
 <%= render 'layouts/navbar' %>
 
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <% flash.each do |message_type, message| %>
 
@@ -24,7 +24,12 @@
       </div>
     <% end %>
   </div>
-	<%= yield %>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <%= yield %>
+  </div>
 </div>
 
 <div class="container">
