@@ -13,4 +13,9 @@ class Deal < ActiveRecord::Base
 
   def set_default_expire ; self.expire ||= Time.now + 3.days ; end
   def set_default_status ; self.status ||= 'wait' ; end
+
+  scope :not_expired, -> {where('expire >= NOW()')}
+  scope :user, -> (user_id){where(user: user_id)}
+  scope :status, -> (status){where(status: status)}
+  scope :recent, -> {order('updated_at DESC')}
 end

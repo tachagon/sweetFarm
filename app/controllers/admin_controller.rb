@@ -15,4 +15,8 @@ class AdminController < ApplicationController
     @announcements = Announcement.all
   end
 
+  def all_deals
+    @deals = Deal.all
+  end
+
 end

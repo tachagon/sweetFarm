@@ -9,6 +9,7 @@ class AnnouncementsController < ApplicationController
     # @announcements = Announcement.other_user(current_user.id).recent
     @announcements = Announcement.recent.user(params[:user_id]) if params[:user_id]
     @announcements = Announcement.recent.user(params[:user_id]).role(params[:role]) if params[:user_id] && params[:role]
+    @role = params[:role]
     respond_to do |format|
       format.html
       format.json{render json: @announcements}
@@ -42,6 +43,7 @@ class AnnouncementsController < ApplicationController
 
   def edit
     @announcement = Announcement.find_by_id(params[:id])
+    @role = @announcement.role
   end
 
   def update

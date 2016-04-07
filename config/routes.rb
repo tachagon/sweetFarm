@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get 'admin/menu' => 'admin#menu'
     get 'admin/all_sales' => 'admin#all_sales'
     get 'admin/all_announcements' => 'admin#all_announcements'
+    get 'admin/all_deals' => 'admin#all_deals'
 
     resources :users do
       post 'update_role' => 'users#update_role'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
     end
 
     resources :announcements
+    resources :deals, only: [:index, :show, :create, :destroy]
 
   # end
   # resources :users

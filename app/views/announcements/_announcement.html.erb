@@ -49,10 +49,28 @@
           <p class="center" style="color: red;">หมดอายุแล้ว</p>
         <% end %>
 
-      <a href="#" title="ยื่นข้อเสนอ" class="btn btn-block btn-<%= announcement.role %>-deal" <%= "disabled='disabled'" if announcement.expire < Time.now %>>
-        <%= "เสนอขาย" if announcement.role == 'purchase' %>
-        <%= "เสนอซื้อ" if announcement.role == 'sale' %>
-      </a>
+      <% if announcement.user != current_user %>
+        <a href="#" title="ยื่นข้อเสนอ" class="btn btn-block btn-<%= announcement.role %>-deal" <%= "disabled='disabled'" if announcement.expire < Time.now %>>
+          <%= "เสนอขาย" if announcement.role == 'purchase' %>
+          <%= "เสนอซื้อ" if announcement.role == 'sale' %>
+        </a>
+      <% else %>
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="<%= announcement_path(announcement) %>" class="btn btn-default btn-block" title="ดูรายละเอียดประกาศ">
+              <i class="fa fa-eye"></i>
+              ดูรายละเอียด
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a href="<%= edit_announcement_path(announcement) %>" class="btn btn-default btn-block">
+              <i class="fa fa-pencil"></i>
+              แก้ไข
+            </a>
+          </div>
+        </div>
+      <% end %>
+
     </a>
   </div>
   <!-- ./thumbnail -->

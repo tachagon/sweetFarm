@@ -40,4 +40,55 @@
   <%= f.select :district_id, [], {}, {class: 'form-control'} %>
 </div>
 
-<%= f.submit "เพิ่มประกาศใหม่", class: 'btn btn-primary btn-block' %>
+<%= f.submit yield(:btn_announcement_form), class: 'btn btn-primary btn-block' %>
+
+
+<script type="text/javascript">
+  var show_result = function() {
+    $(document).ready(function(){
+      var amount = $('#announcement_amount').val();
+      var price = $('#announcement_price').val();
+      var result = amount*price;
+      $('#result-price').text("ราคารวม " + result + " บาท").digits();
+    });
+  }
+
+  $(document).ready(function() {
+
+    show_result();
+
+    $('#announcement_role').hide();
+
+    $('#announcement_province').select2();
+
+    $('#announcement_amphur').select2();
+
+    $('#announcement_district_id').select2();
+
+    option_province('announcement_province');
+
+    $('#announcement_province').change(function(){
+      var province_id = $('#announcement_province').val();
+      option_amphur('announcement_amphur', province_id);
+      $('#announcement_amphur').val('US');
+      $('#announcement_amphur').trigger('change');
+      $('#announcement_district_id').val('US');
+      $('#announcement_district_id').trigger('change');
+    });
+
+    $('#announcement_amphur').change(function(){
+      var province_id = $('#announcement_province').val();
+      var amphur_id = $('#announcement_amphur').val();
+      option_district('announcement_district_id', province_id, amphur_id);
+      $('#announcement_district_id').val('US');
+      $('#announcement_district_id').trigger('change');
+    });
+
+  });
+</script>
+
+<style type="text/css">
+  #result-price{
+    color: orange;
+  }
+</style>
