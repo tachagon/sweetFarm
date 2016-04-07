@@ -10,6 +10,83 @@ th:
   error: "ข้อผิดพลาด"
   remember_me: "จดจำฉัน"
   settings: "การตั้งค่า"
+
+  date:
+    abbr_day_names:
+    - อา
+    - จ
+    - อ
+    - พ
+    - พฤ
+    - ศ
+    - ส
+    abbr_month_names:
+    -
+    - ม.ค.
+    - ก.พ.
+    - มี.ค.
+    - เม.ย.
+    - พ.ค.
+    - มิ.ย.
+    - ก.ค.
+    - ส.ค.
+    - ก.ย.
+    - ต.ค.
+    - พ.ย.
+    - ธ.ค.
+    day_names:
+    - อาทิตย์
+    - จันทร์
+    - อังคาร
+    - พุธ
+    - พฤหัสบดี
+    - ศุกร์
+    - เสาร์
+    formats:
+      default: "%d-%m-%Y"
+      long: "%B %d, %Y"
+      short: "%b %d"
+    month_names:
+    -
+    - มกราคม
+    - กุมภาพันธ์
+    - มีนาคม
+    - เมษายน
+    - พฤษภาคม
+    - มิถุนายน
+    - กรกฎาคม
+    - สิงหาคม
+    - กันยายน
+    - ตุลาคม
+    - พฤศจิกายน
+    - ธันวาคม
+    order:
+    - :day
+    - :month
+    - :year
+
+# -------------------------------------------------------------------
+  datetime:
+    distance_in_words:
+      about_x_hours: "ประมาณ %{count} ชั่วโมง"
+      about_x_months: "ประมาณ %{count} เดือน"
+      about_x_years: "ประมาณ %{count} ปี"
+      almost_x_years: "ประมาณ %{count} ปี"
+      half_a_minute: "ครึ่งนาที"
+      less_than_x_minutes: "น้อยกว่า %{count} นาที"
+      less_than_x_seconds: "น้อยกว่า %{count} วินาที"
+      over_x_years: "มากกว่า %{count} ปี"
+      x_days: "%{count} วัน"
+      x_minutes: "%{count} นาที"
+      x_months: "%{count} เดือน"
+      x_seconds: "%{count} วินาที"
+    prompts:
+      day: "วัน"
+      hour: "ชั่วโมง"
+      minute: "นาที"
+      month: "เดือน"
+      second: "วินาที"
+      year: "ปี"
 # -------------------------------------------------------------------
   activerecord:
     attributes:
@@ -38,23 +115,42 @@ th:
         district_id: 'ตำบล'
 
     errors:
+      format: "%{attribute} %{message}"
       messages:
+        accepted: "จะต้องได้รับการยอมรับ"
         blank: "ต้องระบุข้อมูล"
+        present: "จะต้องว่างเปล่า"
+        confirmation: "ไม่ตรงกับ %{attribute}"
+        empty: "ต้องไม่ว่างเปล่า"
+        equal_to: "ต้องเท่ากับ %{count}"
+        even: "ต้องเป็นจำนวนคู่"
+        exclusion: "ถูกสงวนไว้"
+        greater_than: "ต้องมากกว่า %{count}"
+        greater_than_or_equal_to: "ต้องมากกว่าหรือเท่ากับ %{count}"
+        inclusion: "ไม่ได้อยู่ในรายการที่สามารถใช้ได้"
         invalid: "รูปแบบไม่ถูกต้อง"
-        too_short: "สั้นเกินไป"
-        too_long: "ยาวเกินไป"
-        confirmation: "การยืนยันไม่ถูกต้อง"
-        taken: "ถูกนำไปใช้แล้ว"
-        record_invalid: "ข้อมูลไม่ถูกต้อง"
+        less_than: "ต้องน้อยกว่า %{count}"
+        less_than_or_equal_to: "ต้องน้อยกว่าหรือเท่ากับ %{count}"
+        model_invalid: "การตรวจสอบล้มเหลว: %{errors}"
         not_a_number: "ต้องเป็นตัวเลข"
+        not_a_integer: "ต้องเป็นจำนวนเต็ม"
+        odd: "ต้องเป็นจำนวนคี่"
+        required: "จะต้องระบุ"
+        taken: "ถูกนำไปใช้แล้ว"
+        too_long: "ความยาวต้องไม่เกิน %{count} ตัวอักษร"
+        too_short: "ความยาวต้องมากกว่า %{count} ตัวอักษร"
+        wrong_length: "ควรมีความยาว %{count} ตัวอักษร"
+        other_than: "ควรมากกว่า %{count}"
+
+        record_invalid: "ข้อมูลไม่ถูกต้อง: %{errors}"
+
 
       models:
         user:
           attributes:
             email:
               taken: "นี้ถูกใช้ไปแล้ว"
-            password_confirmation:
-              confirmation: "ไม่ถูกต้อง"
+
 # -------------------------------------------------------------------
   views:
     static_pages:

@@ -28,6 +28,10 @@ class AnnouncementTest < ActiveSupport::TestCase
     assert @announcement_purchase.valid?
   end
 
+  # ==========================================================
+  # test amount attribute
+  # ==========================================================
+
   test "amount should be present" do
     @announcement_sale.amount = nil
     assert_not @announcement_sale.valid?
@@ -43,6 +47,10 @@ class AnnouncementTest < ActiveSupport::TestCase
     @announcement_sale.amount = 0.1
     assert @announcement_sale.valid?
   end
+
+  # ==========================================================
+  # test price attribute
+  # ==========================================================
 
   test "price should be present" do
     @announcement_sale.price = nil
@@ -60,6 +68,10 @@ class AnnouncementTest < ActiveSupport::TestCase
     assert @announcement_sale.valid?
   end
 
+  # ==========================================================
+  # test role attribute
+  # ==========================================================
+
   test "role should be present" do
     @announcement_sale.role = ''
     assert_not @announcement_sale.valid?
@@ -76,6 +88,10 @@ class AnnouncementTest < ActiveSupport::TestCase
     assert @announcement_sale.valid?
   end
 
+  # ==========================================================
+  # test expire attribute
+  # ==========================================================
+
   test "expire should be present" do
     @announcement_sale.expire = nil
     assert_not @announcement_sale.valid?
@@ -91,6 +107,9 @@ class AnnouncementTest < ActiveSupport::TestCase
     assert_equal(next_7_day.min, @announcement_sale.expire.min)
   end
 
+  # ==========================================================
+  # test show attribute
+  # ==========================================================
 
   test "show should be present" do
     @announcement_sale.show = nil
@@ -102,10 +121,18 @@ class AnnouncementTest < ActiveSupport::TestCase
     assert_equal(@announcement_sale.show, true)
   end
 
+  # ==========================================================
+  # test user attribute
+  # ==========================================================
+
   test "user should be present" do
     @announcement_sale.user = nil
     assert_not @announcement_sale.valid?
   end
+
+  # ==========================================================
+  # test district attribute
+  # ==========================================================
 
   test "district should be present" do
     @announcement_sale.district = nil
