@@ -3,7 +3,7 @@
 <div class="form-group">
   <%= f.label :amount %>
   <div class="input-group">
-    <%= number_field :announcement, :amount, min: 1, class: 'form-control', onchange: 'show_result()' %>
+    <%= number_field :announcement, :amount, min: 1, class: 'form-control', onkeyup: 'show_result()' %>
     <div class="input-group-addon">ตัน</div>
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="form-group">
   <%= f.label :price %>
   <div class="input-group">
-    <%= number_field :announcement, :price, min: 1, class: 'form-control', onchange: 'show_result()' %>
+    <%= number_field :announcement, :price, min: 1, class: 'form-control', onkeyup: 'show_result()' %>
     <div class="input-group-addon">บาท / ตัน</div>
   </div>
   <span class="help-block" id="result-price">ราคารวม 0 บาท</span>
@@ -19,26 +19,50 @@
 
 <%= f.text_field :role, value: @role %>
 
-<div class="form-group">
-  <div class="form-control-static">
-    เลือกพื้นที่
+  <div class="form-group">
+    <div class="form-control-static">
+      เลือกพื้นที่
+    </div>
   </div>
-</div>
 
-<div class="form-group">
-  <%= f.label :province, "จังหวัด" %>
-  <select name="province" class="form-control" id="announcement_province"></select>
-</div>
+<% if not(@announcement.new_record?) %>
 
-<div class="form-group">
-  <%= f.label :amphur, "อำเภอ" %>
-  <select name="amphur" class="form-control", id="announcement_amphur"></select>
-</div>
+  <div class="form-group">
+    <label class="control-label">พื้นที่</label>
+    <p class="form-control-static">
+      <i class="fa fa-map-marker"></i>
+      จ.<%= @announcement.district.province.PROVINCE_NAME %>
+      อ.<%= @announcement.district.amphur.AMPHUR_NAME %>
+      ต.<%= @announcement.district.DISTRICT_NAME %>
+      <a id="edit-aria" title="แก้ไขพื้นที่" onclick="show_select_aria()"><i class="fa fa-pencil"></i> แก้ไข</a>
+    </p>
+  </div>
 
-<div class="form-group">
-  <%= f.label :district_id, "ตำบล" %>
-  <%= f.select :district_id, [], {}, {class: 'form-control'} %>
-</div>
+  <script type="text/javascript">
+    $('.select-aria').hide();
+  </script>
+
+
+<% end %>
+
+  <div class="select-aria">
+
+    <div class="form-group">
+      <%= f.label :province, "จังหวัด" %>
+      <select name="province" class="form-control" id="announcement_province"></select>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :amphur, "อำเภอ" %>
+      <select name="amphur" class="form-control", id="announcement_amphur"></select>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :district_id, "ตำบล" %>
+      <%= f.select :district_id, [], {}, {class: 'form-control'} %>
+    </div>
+
+  </div>
 
 <%= f.submit yield(:btn_announcement_form), class: 'btn btn-primary btn-block' %>
 
@@ -53,9 +77,17 @@
     });
   }
 
+  var show_select_aria = function () {
+    $('.select-aria').slideToggle();
+  }
+
   $(document).ready(function() {
 
     show_result();
+
+    <% if not(@announcement.new_record?) %>
+      $('.select-aria').hide();
+    <% end %>
 
     $('#announcement_role').hide();
 

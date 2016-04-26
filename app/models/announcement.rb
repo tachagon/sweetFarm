@@ -3,6 +3,8 @@ class Announcement < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :district
+  has_many :attractions, dependent: :destroy
+  has_many :deals, through: :attractions
 
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :price, presence: true, numericality: {greater_than: 0}

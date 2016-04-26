@@ -113,6 +113,15 @@ th:
         show: 'สถานะการแสดงผล'
         user: 'ผู้ใช้'
         district_id: 'ตำบล'
+      deal:
+        amount: 'จำนวนอ้อย'
+        price: 'ราคาอ้อย'
+        expire: 'วันหมดอายุข้อเสนอ'
+        user: 'ผู้ใช้'
+        status: 'สถานะข้อเสนอ'
+      attraction:
+        deal: 'ข้อเสนอ'
+        announcement: 'ประกาศ'
 
     errors:
       format: "%{attribute} %{message}"

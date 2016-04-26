@@ -48,46 +48,7 @@
           </table>
         </div>
 
-        <% if deal.status != 'wait' %>
-
           <%= show_deal_status(deal) %>
-
-        <% elsif deal.expire >= Time.now && deal.status == 'wait' %>
-
-          <div class="center">
-
-            <% if announcement.user == current_user %>
-
-            <div class="row">
-              <div class="col-sm-6 col-md-6">
-                <%= link_to "ปฏิเสธ", deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "decline"), method: :patch, data: {confirm: "คุณต้องการปฏิเสธข้อเสนอ?"}, class: 'btn btn-danger btn-block' %>
-              </div>
-              <div class="col-sm-6 col-md-6">
-                <%= link_to 'ตกลง', deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "accepted"), method: :patch, class: "btn btn-success btn-block btn-lg" %>
-              </div>
-            </div>
-
-            <% end %>
-
-            <p class="center" style="color: gray;">
-              หมดอายุในอีก <%= distance_of_time_in_words_to_now(deal.expire) %>
-            </p>
-          </div>
-
-        <% else %>
-
-          <p class="center" style="color: red;">หมดอายุแล้ว</p>
-
-        <% end %>
-
-        <% if announcement.user == current_user || deal.user == current_user %>
-
-          <a href="<%= deal_path(deal) %>" class="btn btn-default btn-block" title="ดูรายละเอียดข้อเสนอ">
-            <i class="fa fa-eye"></i>
-            ดูรายละเอียด
-          </a>
-
-        <% end %>
 
       </div>
       <!-- ./media-body -->

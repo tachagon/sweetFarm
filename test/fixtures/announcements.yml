@@ -18,6 +18,6 @@ announcement_purchase_<%= n %>:
   role: purchase
   expire: <%= Time.now + 7.days %>
   show: true
-  user: tatchagon
+  user: pasin
   district_id: 7069
 <% end %>

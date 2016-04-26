@@ -32,6 +32,9 @@ body {
   text-align: right;
 }
 
+.color-danger {
+  color: $brand-danger;
+}
 // user picture -------------------------------------------------------------------
 
 #nav-user-picture {
@@ -42,6 +45,11 @@ body {
 #show-user-picture {
   height: 200;
   width: 200px;
+}
+
+#deal-user-picture {
+  height: 50px;
+  width: 50px;
 }
 
 #error_explanation {

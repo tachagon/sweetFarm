@@ -99,6 +99,9 @@ class DealTest < ActiveSupport::TestCase
     @deal.status = 'wait'
     assert @deal.valid?
 
+    @deal.status = 'decline'
+    assert @deal.valid?
+
     @deal.status = 'accepted'
     assert @deal.valid?
 

@@ -12,3 +12,9 @@ pasin:
   email: pasin_book@hotmail.com
   password_digest: <%= User.digest('password') %>
   role: user
+
+nina:
+  name: Nina Jung
+  email: nina@gmail.com
+  password_digest: <%= User.digest('password') %>
+  role: user
