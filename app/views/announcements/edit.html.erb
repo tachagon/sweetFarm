@@ -1,0 +1,40 @@
+<% provide(:title, 'แก้ไขประกาศ') %>
+<% provide(:btn_announcement_form, 'แก้ไขประกาศ') %>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="<%= root_path %>">หน้าแรก</a>
+    </li>
+    <li>
+      <a href="<%= announcements_path(user_id: current_user, role: @announcement.role) %>">
+        <%= "ระบบซื้ออ้อย" if @announcement.role == 'purchase' %>
+        <%= "ระบบขายอ้อย" if @announcement.role == 'sale' %>
+      </a>
+    </li>
+    <li>
+      <a href="<%= announcement_path(@announcement) %>">
+        <%= 'ประกาศซื้ออ้อย' if @announcement.role == 'purchase' %>
+        <%= 'ประกาศขายอ้อย' if @announcement.role == 'sale' %>
+      </a>
+    </li>
+    <li class="active">แก้ไขประกาศ</li>
+  </ol>
+
+  <div class="page-header">
+    <h1>
+      ระบบ<%= 'ขายอ้อย' if @role == 'sale' %><%= 'ซื้ออ้อย' if @role == 'purchase' %>
+      <small>แก้ไขประกาศ</small>
+    </h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@announcement, url: announcement_path(@announcement)) do |f| %>
+        <%= render partial: 'form', locals: {f: f} %>
+      <% end %>
+    </div>
+  </div>
+
+</div>

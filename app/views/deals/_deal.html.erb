@@ -1,0 +1,101 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <div class="media">
+
+      <a class="pull-left" href="<%= user_path(deal.user) %>" title="โปรไฟล์ของ<%= deal.user.name %>">
+        <%= image_tag deal.user.picture, class: 'media-object', id: 'deal-user-picture' %>
+      </a>
+
+      <div class="media-body">
+
+        <a href="<%= user_path(deal.user) %>" title="โปรไฟล์ของ<%= deal.user.name %>">
+          <h4 class="media-heading"><%= deal.user.name %></h4>
+        </a>
+
+        <div class="deal-ratings">
+          <div class="pull-right">15 รีวิว</div>
+          <p>
+            <span><i class="fa fa-star"></i></span>
+            <span><i class="fa fa-star"></i></span>
+            <span><i class="fa fa-star"></i></span>
+            <span><i class="fa fa-star-half-o"></i></span>
+            <span><i class="fa fa-star-o"></i></span>
+          </p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tr>
+              <th>จำนวน</th>
+              <td><%= number_with_delimiter(deal.amount, delimiter: ',') %></td>
+              <td>ตัน</td>
+            </tr>
+            <tr>
+              <th>ราคา</th>
+              <td><%= number_with_delimiter(deal.price, delimiter: ',') %></td>
+              <td>บาท/ตัน</td>
+            </tr>
+            <tr>
+              <th>รวม</th>
+              <td>
+                <h4 class="result-price">
+                  ฿<%= number_with_delimiter(deal.price * deal.amount, delimiter: ',') %>
+                </h4>
+              </td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+
+        <% if deal.status != 'wait' %>
+
+          <%= show_deal_status(deal) %>
+
+        <% elsif deal.expire >= Time.now && deal.status == 'wait' %>
+
+          <div class="center">
+
+            <% if announcement.user == current_user %>
+
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <%= link_to "ปฏิเสธ", deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "decline"), method: :patch, data: {confirm: "คุณต้องการปฏิเสธข้อเสนอ?"}, class: 'btn btn-danger btn-block' %>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <%= link_to 'ตกลง', deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "accepted"), method: :patch, class: "btn btn-success btn-block btn-lg" %>
+              </div>
+            </div>
+
+            <% end %>
+
+            <p class="center" style="color: gray;">
+              หมดอายุในอีก <%= distance_of_time_in_words_to_now(deal.expire) %>
+            </p>
+          </div>
+
+        <% else %>
+
+          <p class="center" style="color: red;">หมดอายุแล้ว</p>
+
+        <% end %>
+
+        <% if announcement.user == current_user || deal.user == current_user %>
+
+          <a href="<%= deal_path(deal) %>" class="btn btn-default btn-block" title="ดูรายละเอียดข้อเสนอ">
+            <i class="fa fa-eye"></i>
+            ดูรายละเอียด
+          </a>
+
+        <% end %>
+
+      </div>
+      <!-- ./media-body -->
+    </div>
+    <!-- ./media -->
+
+  </div>
+  <!-- ./panel-body -->
+</div>
+<!-- ./panel -->
+

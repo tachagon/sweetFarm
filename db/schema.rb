@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401080612) do
+ActiveRecord::Schema.define(version: 20160407162131) do
 
   create_table "amphur", primary_key: "AMPHUR_ID", force: :cascade do |t|
     t.string  "AMPHUR_CODE", limit: 4,               null: false
@@ -34,6 +34,28 @@ ActiveRecord::Schema.define(version: 20160401080612) do
 
   add_index "announcements", ["district_id"], name: "index_announcements_on_district_id", using: :btree
   add_index "announcements", ["user_id"], name: "index_announcements_on_user_id", using: :btree
+
+  create_table "attractions", force: :cascade do |t|
+    t.integer  "deal_id",         limit: 4
+    t.integer  "announcement_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "attractions", ["announcement_id"], name: "index_attractions_on_announcement_id", using: :btree
+  add_index "attractions", ["deal_id"], name: "index_attractions_on_deal_id", using: :btree
+
+  create_table "deals", force: :cascade do |t|
+    t.float    "amount",     limit: 24
+    t.float    "price",      limit: 24
+    t.datetime "expire"
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "status",     limit: 255
+  end
+
+  add_index "deals", ["user_id"], name: "index_deals_on_user_id", using: :btree
 
   create_table "district", primary_key: "DISTRICT_ID", force: :cascade do |t|
     t.string  "DISTRICT_CODE", limit: 6,               null: false
@@ -108,6 +130,9 @@ ActiveRecord::Schema.define(version: 20160401080612) do
   end
 
   add_foreign_key "announcements", "users"
+  add_foreign_key "attractions", "announcements"
+  add_foreign_key "attractions", "deals"
+  add_foreign_key "deals", "users"
   add_foreign_key "sales", "sale_statuses"
   add_foreign_key "sales", "users"
   add_foreign_key "single_sign_ons", "users"

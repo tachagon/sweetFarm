@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= root_path %>">หน้าแรก</a>
+      </li>
+      <li>
+        <a href="<%= announcements_path(user_id: current_user, role: @announcement.role) %>">
+          <%= "ระบบซื้ออ้อย" if @announcement.role == 'purchase' %>
+          <%= "ระบบขายอ้อย" if @announcement.role == 'sale' %>
+        </a>
+      </li>
+      <li>
+        <a href="<%= announcement_path(@announcement) %>">
+          <%= 'ประกาศซื้ออ้อย' if @announcement.role == 'purchase' %>
+          <%= 'ประกาศขายอ้อย' if @announcement.role == 'sale' %>
+        </a>
+      </li>
+      <li class="active">
+        รายละเอียดข้อเสนอ
+      </li>
+    </ol>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="container">
+    <%= render partial: "step_progress", locals: {deal: @deal} %>
+  </div>
+</div>
+<!-- ./row -->
+
+  <div class="row">
+    <div class="container">
+
+      <div class="col-md-6">
+        <div role="tabpanel">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+
+            <li role="presentation" class="active">
+              <a href="#announcement" aria-controls="announcement" role="tab" data-toggle="tab">ประกาศ</a>
+            </li>
+
+            <li role="presentation">
+              <a href="#deal" aria-controls="tab" role="tab" data-toggle="tab">ข้อเสนอ</a>
+            </li>
+
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+
+            <div role="tabpanel" class="tab-pane active" id="announcement">
+              <% @announcements.each do |announcement| %>
+                <%= render partial: "announcements/deal_announcement", locals: {announcement: announcement} %>
+              <% end %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="deal">
+              <%= render partial: 'show_deal', locals: {deal: @deal} %>
+            </div>
+
+          </div>
+          <!-- ./tab-content -->
+        </div>
+        <!-- ./tabpanel -->
+      </div>
+      <!-- ./col -->
+
+      <div class="col-md-6">
+        Messenge
+      </div>
+      <!-- ./col -->
+
+    </div>
+    <!-- ./container -->
+  </div>
+  <!-- ./row -->
+
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+  var status = "<%= @deal.status %>";
+  if (status == "wait") {
+    resetActive("step-wait-btn", 0, 'step-wait');
+  } else if (status == "decline") {
+    resetActive("step-wait-btn", 0, 'step-decline');
+    document.getElementById("step-wait-btn").innerHTML = "<span class=\'fa fa-ban\'></span> <p>ข้อเสนอถูกปฏิเสธ</p>";
+  } else if (status == "accepted") {
+    resetActive("step-paid-btn", 25, 'step-paid');
+  } else if (status == "paid") {
+    resetActive("step-shipped-btn", 50, "step-shipped");
+  } else if (status == "shipped") {
+    resetActive("step-reviewed-btn", 75, "step-reviewed");
+  }
+});
+
+  function resetActive(target_id, percent, step) {
+
+    $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
+    $(".progress-completed").text(percent + "%");
+
+    $(".step div").each(function () {
+      if ($(this).hasClass("activestep")) {
+        $(this).removeClass("activestep");
+      }
+    });
+
+    $("#"+target_id).addClass("activestep");
+
+    hideSteps();
+    showCurrentStepInfo(step);
+  }
+
+  function hideSteps() {
+    $("div").each(function () {
+      if ($(this).hasClass("activeStepInfo")) {
+        $(this).removeClass("activeStepInfo");
+        $(this).addClass("hiddenStepInfo");
+      }
+    });
+  }
+
+  function showCurrentStepInfo(step) {
+    var id = "#" + step;
+    $(id).addClass("activeStepInfo");
+  }
+</script>

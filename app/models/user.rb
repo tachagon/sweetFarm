@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :single_sign_ons, dependent: :destroy
   has_many :sales, dependent: :destroy
   has_many :announcements, dependent: :destroy
+  has_many :deals, dependent: :destroy
 
   attr_accessor :remember_token
 

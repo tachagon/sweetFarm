@@ -41,6 +41,12 @@ class AnnouncementsControllerTest < ActionController::TestCase
     assert_template 'announcements/show'
   end
 
+  test "should redirect show when id invalid" do
+    log_in_as(@user)
+    get :show, id: -1
+    assert_redirected_to announcements_url
+  end
+
   #=============================================================
   # test new
   #=============================================================
@@ -143,6 +149,12 @@ class AnnouncementsControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
+  test "should redirect edit when id invalid" do
+    log_in_as(@user)
+    get :edit, id: -1
+    assert_redirected_to announcements_url
+  end
+
   #=============================================================
   # test update
   #=============================================================
@@ -209,6 +221,19 @@ class AnnouncementsControllerTest < ActionController::TestCase
     assert_equal(@announcement.expire.year, next_week.year)
     assert_equal(@announcement.expire.hour, next_week.hour)
     assert_equal(@announcement.expire.min, next_week.min)
+end
+
+test "should redirect update when id invalid" do
+  log_in_as(@user)
+  assert_no_difference "Announcement.count" do
+    patch :update, id: -1, announcement: {
+      amount: 50,
+      price: 800,
+      role: 'sale',
+      district_id: @banmai.id
+    }
+  end
+  assert_redirected_to announcements_url
 end
 
 #=============================================================

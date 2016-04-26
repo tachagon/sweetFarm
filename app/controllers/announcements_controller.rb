@@ -1,6 +1,7 @@
 class AnnouncementsController < ApplicationController
 
   before_action :logged_in_user, except: [:index]
+  before_action :set_announcement_obj, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy]
 
@@ -9,6 +10,7 @@ class AnnouncementsController < ApplicationController
     # @announcements = Announcement.other_user(current_user.id).recent
     @announcements = Announcement.recent.user(params[:user_id]) if params[:user_id]
     @announcements = Announcement.recent.user(params[:user_id]).role(params[:role]) if params[:user_id] && params[:role]
+    @role = params[:role]
     respond_to do |format|
       format.html
       format.json{render json: @announcements}
@@ -17,7 +19,13 @@ class AnnouncementsController < ApplicationController
   end
 
   def show
-    @announcement = Announcement.find_by_id(params[:id])
+    @deal = current_user.deals.build
+    @deals = @announcement.deals.best_price.best_amount.recent
+    respond_to do |format|
+      format.html
+      format.json{render json: @announcement}
+      format.xml{render xml: @announcement}
+    end
   end
 
   def new
@@ -41,11 +49,10 @@ class AnnouncementsController < ApplicationController
   end
 
   def edit
-    @announcement = Announcement.find_by_id(params[:id])
+    @role = @announcement.role
   end
 
   def update
-    @announcement = Announcement.find_by_id(params[:id])
     if @announcement.update_attributes(announcement_params)
       @announcement.expire = Time.now + 7.days
       @announcement.save!
@@ -66,6 +73,11 @@ class AnnouncementsController < ApplicationController
 
     def announcement_params
       params.require(:announcement).permit(:amount, :price, :role, :district_id)
+    end
+
+    def set_announcement_obj
+      @announcement = Announcement.find_by_id(params[:id])
+      redirect_to announcements_path if @announcement.nil?
     end
 
     # Confirms the correct user.

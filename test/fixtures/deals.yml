@@ -1,0 +1,56 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 5.times do |n| %>
+deal_wait_<%= n %>:
+  amount: 50
+  price: 900
+  expire: <%= Time.now + 3.days %>
+  user: tatchagon
+  status: wait
+<% end %>
+
+<% 5.times do |n| %>
+deal_accepted_<%= n %>:
+  amount: 50
+  price: 900
+  expire: <%= Time.now + 3.days %>
+  user: tatchagon
+  status: accepted
+<% end %>
+
+<% 5.times do |n| %>
+deal_paid_<%= n %>:
+  amount: 50
+  price: 900
+  expire: <%= Time.now + 3.days %>
+  user: tatchagon
+  status: paid
+<% end %>
+
+<% 5.times do |n| %>
+deal_shipped_<%= n %>:
+  amount: 50
+  price: 900
+  expire: <%= Time.now + 3.days %>
+  user: tatchagon
+  status: shipped
+<% end %>
+
+<% 5.times do |n| %>
+deal_reviewed_<%= n %>:
+  amount: 50
+  price: 900
+  expire: <%= Time.now + 3.days %>
+  user: tatchagon
+  status: reviewed
+<% end %>
+
+
+<% 5.times do |n| %>
+deal_completed_<%= n %>:
+  amount: 50
+  price: 900
+  expire: <%= Time.now + 3.days %>
+  user: tatchagon
+  status: completed
+<% end %>

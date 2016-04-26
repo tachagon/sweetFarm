@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <div class="media">
+
+      <a class="pull-left" href="<%= user_path(deal.user) %>" title="โปรไฟล์ของ<%= deal.user.name %>">
+        <%= image_tag deal.user.picture, class: 'media-object', id: 'deal-user-picture' %>
+      </a>
+
+      <div class="media-body">
+
+        <a href="<%= user_path(deal.user) %>" title="โปรไฟล์ของ<%= deal.user.name %>">
+          <h4 class="media-heading"><%= deal.user.name %></h4>
+        </a>
+
+        <div class="deal-ratings">
+          <div class="pull-right">15 รีวิว</div>
+          <p>
+            <span><i class="fa fa-star"></i></span>
+            <span><i class="fa fa-star"></i></span>
+            <span><i class="fa fa-star"></i></span>
+            <span><i class="fa fa-star-half-o"></i></span>
+            <span><i class="fa fa-star-o"></i></span>
+          </p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tr>
+              <th>จำนวน</th>
+              <td><%= number_with_delimiter(deal.amount, delimiter: ',') %></td>
+              <td>ตัน</td>
+            </tr>
+            <tr>
+              <th>ราคา</th>
+              <td><%= number_with_delimiter(deal.price, delimiter: ',') %></td>
+              <td>บาท/ตัน</td>
+            </tr>
+            <tr>
+              <th>รวม</th>
+              <td>
+                <h4 class="result-price">
+                  ฿<%= number_with_delimiter(deal.price * deal.amount, delimiter: ',') %>
+                </h4>
+              </td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+
+          <%= show_deal_status(deal) %>
+
+      </div>
+      <!-- ./media-body -->
+    </div>
+    <!-- ./media -->
+
+  </div>
+  <!-- ./panel-body -->
+</div>
+<!-- ./panel -->
+

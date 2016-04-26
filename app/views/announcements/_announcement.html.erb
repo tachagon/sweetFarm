@@ -5,7 +5,7 @@
       <%= image_tag('product_default.png') %>
       <div class="caption">
 
-        <h4 id="announcement-role-<%= announcement.role %>">
+        <h4 class="<%= announcement.role %>-text">
           <%= 'ซื้ออ้อย' if announcement.role == 'purchase' %>
           <%= 'ขายอ้อย' if announcement.role == 'sale' %>
           <%= announcement.amount %> ตัน
@@ -18,7 +18,7 @@
           ต.<%= announcement.district.DISTRICT_NAME %>
         </p>
 
-        <h4 class="pull-right" id="announcement-result-price">
+        <h4 class="pull-right result-price">
           ฿<%= number_with_delimiter(announcement.price * announcement.amount, delimiter: ',') %>
         </h4>
 
@@ -41,9 +41,36 @@
         </p>
       </div>
       <!-- ./ratings -->
+        <% if announcement.expire >= Time.now %>
+          <p class="center" style="color: gray;">
+            หมดอายุในอีก <%= distance_of_time_in_words_to_now(announcement.expire) %>
+          </p>
+        <% else %>
+          <p class="center" style="color: red;">หมดอายุแล้ว</p>
+        <% end %>
 
-      <%= link_to 'เสนอขาย', '#', class: 'btn btn-warning btn-block' if announcement.role == 'purchase' %>
-      <%= link_to 'เสนอซื้อ', '#', class: 'btn btn-primary btn-block' if announcement.role == 'sale' %>
+      <% if announcement.user != current_user %>
+        <a href="<%= announcement_path(announcement) %>" title="ยื่นข้อเสนอ" class="btn btn-block btn-<%= announcement.role %>-deal" <%= "disabled='disabled'" if announcement.expire < Time.now %>>
+          <%= "เสนอขาย" if announcement.role == 'purchase' %>
+          <%= "เสนอซื้อ" if announcement.role == 'sale' %>
+        </a>
+      <% else %>
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="<%= announcement_path(announcement) %>" class="btn btn-default btn-block" title="ดูรายละเอียดประกาศ">
+              <i class="fa fa-eye"></i>
+              ดูรายละเอียด
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a href="<%= edit_announcement_path(announcement) %>" class="btn btn-default btn-block">
+              <i class="fa fa-pencil"></i>
+              แก้ไข
+            </a>
+          </div>
+        </div>
+      <% end %>
+
     </a>
   </div>
   <!-- ./thumbnail -->
