@@ -18,7 +18,7 @@ class DealsCreateTest < ActionDispatch::IntegrationTest
         post deals_path(announcement_id: announcement, deal: {amount: nil, price: -1})
       end
     end
-    assert_template 'announcements/show'
+    assert_redirected_to announcement_path(announcement)
     assert_not flash.empty?
   end
 

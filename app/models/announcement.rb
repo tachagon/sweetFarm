@@ -17,7 +17,7 @@ class Announcement < ActiveRecord::Base
 
   def set_default_expire ; self.expire ||= Time.now + 7.days ; end
 
-  scope :not_expired, -> {where('expire >= NOW()')}
+  scope :not_expired, -> {where("expire >= NOW() - INTERVAL 7 HOUR")}
   scope :show, -> {where(show: true)}
   scope :recent, -> {order('updated_at DESC')}
   scope :user, -> (user_id){where(user: user_id)}

@@ -178,3 +178,24 @@ var get_province = function (id) {
 
 // }
 
+
+
+var show_rating = function (target_id, rating_avg) {
+  var output = "";
+  var rating_remain = rating_avg % 1;
+  var rating_int = rating_avg - rating_remain;
+
+  for (var i = 0; i < rating_int; i++) {
+    output += "<span><i class='fa fa-star'></i></span>";
+  }
+
+  for (var i = 0; i < (5 - rating_int); i++) {
+    if ((i == 0) && (rating_remain >= 0.5))  {
+      output += "<span><i class='fa fa-star-half-o'></i></span>";
+    } else {
+      output += "<span><i class='fa fa-star-o'></i></span>";
+    }
+  }
+
+  document.getElementById(target_id).innerHTML = output;
+}

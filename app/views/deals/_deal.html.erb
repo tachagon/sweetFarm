@@ -14,13 +14,13 @@
         </a>
 
         <div class="deal-ratings">
-          <div class="pull-right">15 รีวิว</div>
-          <p>
-            <span><i class="fa fa-star"></i></span>
+          <div class="pull-right"><%= deal.user.passive_reviews.count %> รีวิว</div>
+          <p id="show_deal_rating_<%= deal.id %>">
+            <!-- <span><i class="fa fa-star"></i></span>
             <span><i class="fa fa-star"></i></span>
             <span><i class="fa fa-star"></i></span>
             <span><i class="fa fa-star-half-o"></i></span>
-            <span><i class="fa fa-star-o"></i></span>
+            <span><i class="fa fa-star-o"></i></span> -->
           </p>
         </div>
 
@@ -99,3 +99,7 @@
 </div>
 <!-- ./panel -->
 
+
+<script type="text/javascript">
+  show_rating("show_deal_rating_<%= deal.id %>", <%= get_rating_avg(deal.user) %>);
+</script>

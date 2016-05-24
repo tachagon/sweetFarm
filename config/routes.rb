@@ -26,7 +26,9 @@ Rails.application.routes.draw do
       patch 'update_status_decline_accepted' => 'deals#update_status_decline_accepted'
       patch 'update_status_paid' => 'deals#update_status_paid'
       patch 'update_status_shipped' => 'deals#update_status_shipped'
+      resources :messages, only: [:index, :create]
     end
+    resources :reviews, only: [:create]
 
   # end
   # resources :users

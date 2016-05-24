@@ -106,4 +106,18 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(@user.role, 'user')
   end
 
+  test "should review a user" do
+    tatchagon = users(:tatchagon)
+    pasin = users(:pasin)
+    deal = deals(:deal_shipped_1)
+
+    assert_not tatchagon.reviewing?(pasin)
+    assert_difference "Review.count", 1 do
+      tatchagon.review(pasin, deal, 5, "Very good")
+    end
+    assert tatchagon.reviewing?(pasin)
+    assert pasin.reviewers.include?(tatchagon)
+
+  end
+
 end

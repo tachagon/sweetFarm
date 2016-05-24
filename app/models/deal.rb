@@ -6,6 +6,10 @@ class Deal < ActiveRecord::Base
   has_many :attractions, dependent: :destroy
   has_many :announcements, through: :attractions
 
+  has_many :reviews
+  has_many :messages, dependent: :destroy
+  # validates :reviews_count, numericality: {less_than: 3}
+
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :price, presence: true, numericality: {greater_than: 0}
   validates :expire, presence: true
