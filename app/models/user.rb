@@ -6,6 +6,13 @@ class User < ActiveRecord::Base
   has_many :announcements, dependent: :destroy
   has_many :deals, dependent: :destroy
 
+  has_many :active_reviews, class_name: "Review", foreign_key: "reviewer_id", dependent: :destroy
+  has_many :passive_reviews, class_name: "Review", foreign_key: "reviewed_id", dependent: :destroy
+  has_many :reviewing, through: :active_reviews, source: :reviewed
+  has_many :reviewers, through: :passive_reviews, source: :reviewer
+
+  has_many :messages, dependent: :destroy
+
   attr_accessor :remember_token
 
   before_save {email.downcase!}
@@ -63,6 +70,21 @@ class User < ActiveRecord::Base
   # Forgets a user.
   def forget
       update_attribute(:remember_digest, nil)
+  end
+
+  # Review a user
+  def review(other_user, deal, rating, comment)
+    active_reviews.create(
+      reviewed: other_user,
+      deal: deal,
+      rating: rating,
+      comment: comment
+    )
+  end
+
+  # Returns true if the current user is reviewing the other user
+  def reviewing?(other_user)
+    reviewing.include?(other_user)
   end
 
   private

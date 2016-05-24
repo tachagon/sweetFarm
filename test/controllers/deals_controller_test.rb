@@ -107,7 +107,7 @@ class DealsControllerTest < ActionController::TestCase
       end
     end
     assert_not flash.empty?
-    assert_template 'announcements/show'
+    assert_redirected_to announcement_url(@announcement)
   end
 
   test "should redirect create when announcement_id invalid" do

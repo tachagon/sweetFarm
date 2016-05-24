@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407162131) do
+ActiveRecord::Schema.define(version: 20160524075754) do
 
   create_table "amphur", primary_key: "AMPHUR_ID", force: :cascade do |t|
     t.string  "AMPHUR_CODE", limit: 4,               null: false
@@ -69,11 +69,34 @@ ActiveRecord::Schema.define(version: 20160407162131) do
     t.string "GEO_NAME", limit: 255, null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "deal_id",    limit: 4
+    t.text     "body",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "messages", ["deal_id"], name: "index_messages_on_deal_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
   create_table "province", primary_key: "PROVINCE_ID", force: :cascade do |t|
     t.string  "PROVINCE_CODE", limit: 2,               null: false
     t.string  "PROVINCE_NAME", limit: 150,             null: false
     t.integer "GEO_ID",        limit: 4,   default: 0, null: false
   end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "reviewer_id", limit: 4
+    t.integer  "reviewed_id", limit: 4
+    t.integer  "deal_id",     limit: 4
+    t.integer  "rating",      limit: 4
+    t.text     "comment",     limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "reviews", ["deal_id"], name: "index_reviews_on_deal_id", using: :btree
 
   create_table "sale_statuses", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -133,6 +156,9 @@ ActiveRecord::Schema.define(version: 20160407162131) do
   add_foreign_key "attractions", "announcements"
   add_foreign_key "attractions", "deals"
   add_foreign_key "deals", "users"
+  add_foreign_key "messages", "deals"
+  add_foreign_key "messages", "users"
+  add_foreign_key "reviews", "deals"
   add_foreign_key "sales", "sale_statuses"
   add_foreign_key "sales", "users"
   add_foreign_key "single_sign_ons", "users"

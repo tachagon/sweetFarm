@@ -25,6 +25,7 @@ class DealsController < ApplicationController
     @announcements.each do |announcement|
       @announcement = announcement if announcement.user == @current_user
     end
+    @messages = @deal.messages.recent
     respond_to do |format|
       format.html
       format.json{render json: @deal}
@@ -46,7 +47,7 @@ class DealsController < ApplicationController
       redirect_to announcement_path(@announcement)
     else
       flash[:danger] = 'ยื่นข้อเสนอไม่สำเร็จ'
-      render 'announcements/show'
+      redirect_to announcement_path(@announcement)
     end
   end
 

@@ -33,61 +33,7 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="announcement">
 
-              <div class="thumbnail">
-                <%= image_tag 'product_default.png' %>
-                <div class="caption">
-                  <h4 class="<%= @announcement.role %>-text">
-                    <%= 'ซื้ออ้อย' if @announcement.role == 'purchase' %>
-                    <%= 'ขายอ้อย' if @announcement.role == 'sale' %>
-                    <%= @announcement.amount %> ตัน
-                    <small>(<%= @announcement.price %> บาท/ตัน)</small>
-                  </h4>
-                  <p>
-                    <i class="fa fa-map-marker"></i>
-                    จ.<%= @announcement.district.province.PROVINCE_NAME %>
-                    อ.<%= @announcement.district.amphur.AMPHUR_NAME %>
-                    ต.<%= @announcement.district.DISTRICT_NAME %>
-                  </p>
-                  <h4 class="pull-right result-price">
-                    ฿<%= number_with_delimiter(@announcement.price * @announcement.amount, delimiter: ',') %>
-                  </h4>
-                </div>
-                <!-- ./caption -->
-
-                <div class="ratings">
-                  <div class="pull-right">15 รีวิว</div>
-                  <div class="pull-left">
-                    <a href="<%= user_path(@announcement.user) %>">
-                    <%= image_tag @announcement.user.picture, id: "nav-user-picture" %>
-                    </a>
-                  </div>
-                  <p>
-                    <span><i class="fa fa-star"></i></span>
-                    <span><i class="fa fa-star"></i></span>
-                    <span><i class="fa fa-star"></i></span>
-                    <span><i class="fa fa-star-half-o"></i></span>
-                    <span><i class="fa fa-star-o"></i></span>
-                  </p>
-                </div>
-                <!-- ./ratings -->
-
-                <% if @announcement.expire >= Time.now %>
-                  <p class="center" style="color: gray;">
-                    หมดอายุในอีก <%= distance_of_time_in_words_to_now(@announcement.expire) %>
-                  </p>
-                <% else %>
-                  <p class="center" style="color: red;">หมดอายุแล้ว</p>
-                <% end %>
-
-                <% if @announcement.user == current_user %>
-                  <a href="<%= edit_announcement_path(@announcement) %>" class="btn btn-default btn-block">
-                    <i class="fa fa-pencil"></i>
-                    แก้ไข
-                  </a>
-                <% end %>
-
-              </div>
-              <!-- ./thumbnail -->
+              <%= render partial: "announcement_card", locals: {announcement: @announcement} %>
 
           </div>
           <!-- .tab-pane -->
@@ -121,7 +67,7 @@
               <%= render partial: 'deals/deal', collection: @deals, locals: {announcement: @announcement} %>
             </div>
           </div>
-      </div>
+        </div>
 
     </div>
 

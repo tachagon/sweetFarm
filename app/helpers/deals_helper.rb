@@ -38,4 +38,35 @@ module DealsHelper
     return false
   end
 
+  def show_purchaser(deal, user)
+    if is_purchaser?(deal, user)
+      return "ผู้ซื้อ"
+    else
+      return "ผู้ขาย"
+    end
+  end
+
+  def find_reviewed(deal, user)
+    announcements = deal.announcements
+
+    other_user = nil
+    announcements.each do |announcement|
+      if announcement.user != user
+        other_user = announcement.user
+      end
+    end
+    other_user = deal.user if other_user.nil?
+    return other_user
+  end
+
+  # Returns true if user is reviewd deal
+  def review_deal?(deal, user)
+    reviews = deal.reviews
+
+    reviews.each do |review|
+      return true if review.reviewer == user
+    end
+    return false
+  end
+
 end
