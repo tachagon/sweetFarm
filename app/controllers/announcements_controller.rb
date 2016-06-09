@@ -3,6 +3,7 @@ class AnnouncementsController < ApplicationController
   before_action :logged_in_user, except: [:index]
   before_action :set_announcement_obj, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user_id, only: [:user_announcements, :user_announcements_role]
   before_action :admin_user, only: [:destroy]
 
   def index
@@ -11,6 +12,25 @@ class AnnouncementsController < ApplicationController
     @announcements = Announcement.recent.user(params[:user_id]) if params[:user_id]
     @announcements = Announcement.recent.user(params[:user_id]).role(params[:role]) if params[:user_id] && params[:role]
     @role = params[:role]
+    respond_to do |format|
+      format.html
+      format.json{render json: @announcements}
+      format.xml{render xml: @announcements}
+    end
+  end
+
+  def user_announcements
+    @announcements = Announcement.user(params[:user_id]).recent
+    respond_to do |format|
+      format.html
+      format.json{render json: @announcements}
+      format.xml{render xml: @announcements}
+    end
+  end
+
+  def user_announcements_role
+    @announcements = Announcement.user(params[:user_id]).role(params[:announcement_role]).recent
+    @role = params[:announcement_role]
     respond_to do |format|
       format.html
       format.json{render json: @announcements}
@@ -84,6 +104,11 @@ class AnnouncementsController < ApplicationController
     def correct_user
       @announcement = Announcement.find_by_id(params[:id])
       @user = @announcement.user
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def correct_user_id
+      @user = User.find_by_id(params[:user_id])
       redirect_to(root_url) unless current_user?(@user)
     end
 

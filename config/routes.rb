@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       post 'update_role' => 'users#update_role'
 
       resources :sales
+
+      get 'announcements' => 'announcements#user_announcements', :as => 'announcements'
+      get 'announcements/:announcement_role' => 'announcements#user_announcements_role', :as => 'announcements_role'
     end
 
     resources :announcements

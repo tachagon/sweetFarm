@@ -1,0 +1,27 @@
+<div class="container">
+  <%= generate_breadcrumb({"หน้าแรก": root_path, "ระบบ#{get_announcement_role_th(@role)}": "active"}) %>
+
+  <div class="page-header">
+    <h1>
+      ระบบ<%= get_announcement_role_th(@role) %>
+      <small><%= @announcements.count %> ประกาศ</small>
+    </h1>
+  </div>
+
+  <div class="table-resposive">
+    <table class="table table-hover table-bordered table-striped">
+      <tr>
+        <th>No.</th>
+        <th></th>
+        <th>รูปภาพ</th>
+        <th>จำนวน (ตัน)</th>
+        <th>ราคา (บาท/ตัน)</th>
+        <th>ราคารวม</th>
+        <th>ข้อเสนอ</th>
+        <th>สิ้นสุด</th>
+        <th></th>
+      </tr>
+    </table>
+  </div>
+
+</div>
