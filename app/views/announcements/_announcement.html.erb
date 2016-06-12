@@ -1,8 +1,8 @@
-<div class="col-sm-6 col-md-4 col-lg-4">
+
   <div class="thumbnail announcement-card">
     <a href="<%= announcement_path(announcement) %>" title="ดูรายละเอียดประกาศ">
       <!-- <img src="http://placehold.it/320x150" alt=""> -->
-      <%= image_tag('product_default.png') %>
+      <%= image_tag announcement.cane_picture.url, style: "width: auto; height: 150px;" %>
       <div class="caption">
 
         <h4 class="<%= announcement.role %>-text">
@@ -41,6 +41,7 @@
         </p>
       </div>
       <!-- ./ratings -->
+
         <% if announcement.expire >= Time.now %>
           <p class="center" style="color: gray;">
             หมดอายุในอีก <%= distance_of_time_in_words_to_now(announcement.expire) %>
@@ -74,7 +75,6 @@
     </a>
   </div>
   <!-- ./thumbnail -->
-</div>
 
 <script type="text/javascript">
   show_rating("show_rating_<%= announcement.id %>", <%= get_rating_avg(announcement.user) %>);

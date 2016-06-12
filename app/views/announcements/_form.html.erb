@@ -64,10 +64,25 @@
 
   </div>
 
+<div class="form-group">
+  <%= f.label :cane_picture %>
+  <%= f.file_field :cane_picture, accept: 'image/jpeg,image/gif,image/png' %>
+  <p class="help-block">ขนาดไม่เกิน 5 MB</p>
+</div>
+
 <%= f.submit yield(:btn_announcement_form), class: 'btn btn-primary btn-block' %>
 
 
 <script type="text/javascript">
+
+  $('#announcement_cane_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+
+
   var show_result = function() {
     $(document).ready(function(){
       var amount = $('#announcement_amount').val();

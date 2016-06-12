@@ -43,7 +43,11 @@
 
       <div class="row">
 
-        <%= render partial: 'announcements/announcement', collection: @announcements %>
+        <% @announcements.each do |announcement| %>
+          <div class="col-sm-6 col-md4 col-lg-4">
+            <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} %>
+          </div>
+        <% end %>
 
       </div>
       <!-- ./row -->

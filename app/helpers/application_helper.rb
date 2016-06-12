@@ -2,11 +2,11 @@ module ApplicationHelper
 
   def generate_breadcrumb(link = {})
     output = "<ol class='breadcrumb'>"
-    link.each do |key, value|
-      if value != "active"
-        output << "<li><a href='#{value}'>#{key}</a></li>"
+    link.each do |title, href|
+      if href != "active"
+        output << "<li><a href='#{href}'>#{title}</a></li>"
       else
-        output << "<li class='active'>#{key}</li>"
+        output << "<li class='active'>#{title}</li>"
       end
     end
     output << "</ol>"

@@ -29,7 +29,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def user_announcements_role
-    @announcements = Announcement.user(params[:user_id]).role(params[:announcement_role]).recent
+    @announcements = Announcement.user(params[:user_id]).role(params[:announcement_role]).recent.paginate(page: params[:page], per_page: 10)
     @role = params[:announcement_role]
     respond_to do |format|
       format.html
@@ -92,7 +92,7 @@ class AnnouncementsController < ApplicationController
   private
 
     def announcement_params
-      params.require(:announcement).permit(:amount, :price, :role, :district_id)
+      params.require(:announcement).permit(:amount, :price, :role, :district_id, :cane_picture)
     end
 
     def set_announcement_obj

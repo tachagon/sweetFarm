@@ -6,6 +6,9 @@ class Announcement < ActiveRecord::Base
   has_many :attractions, dependent: :destroy
   has_many :deals, through: :attractions
 
+  mount_uploader :cane_picture, CanePictureUploader
+  validate :cane_picture_size
+
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :price, presence: true, numericality: {greater_than: 0}
   def self.all_role ; %w[sale purchase] ; end
@@ -23,4 +26,12 @@ class Announcement < ActiveRecord::Base
   scope :user, -> (user_id){where(user: user_id)}
   scope :other_user, -> (user_id){where("user_id != #{user_id}")}
   scope :role, -> (role){where(role: role)}
+
+  private
+    def cane_picture_size
+      if cane_picture.size > 5.megabytes
+        errors.add(:cane_picture, 'ขนาดภาพต้องไม่เกิน 5 MB')
+      end
+    end
+
 end

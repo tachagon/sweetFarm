@@ -1,0 +1,45 @@
+<tr>
+
+  <td>
+    #<%= announcement.id %>
+  </td>
+
+  <td class="center">
+    <% if announcement.show %>
+      <i class="fa fa-toggle-on fa-3x color-success"></i>
+    <% else %>
+      <i class="fa fa-toggle-off fa-3x"></i>
+    <% end %>
+  </td>
+
+  <td class="center">
+    <%= image_tag announcement.cane_picture, style: "height: 100px; width: 161px;" %>
+  </td>
+
+  <td class="right">
+    <%= number_with_delimiter(number_with_precision(announcement.amount, precision: 3), delimiter: ',') %>
+  </td>
+
+  <td class="right">
+    <%= number_with_delimiter(number_with_precision(announcement.price, precision: 2), delimiter: ',') %>
+  </td>
+
+  <td class="right">
+    <%= number_with_delimiter(number_with_precision(announcement.price * announcement.amount, precision: 2), delimiter: ',') %>
+  </td>
+
+  <td class="center">
+    <%= announcement.deals.count %>
+  </td>
+
+  <td class="center">
+    <%= I18n.localize(announcement.expire, format: :long) %>
+  </td>
+
+  <td>
+    <div class="center">
+      <%= link_to 'ดูข้อมูล', announcement %>
+    </div>
+  </td>
+
+</tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524075754) do
+ActiveRecord::Schema.define(version: 20160609072127) do
 
   create_table "amphur", primary_key: "AMPHUR_ID", force: :cascade do |t|
     t.string  "AMPHUR_CODE", limit: 4,               null: false
@@ -21,15 +21,16 @@ ActiveRecord::Schema.define(version: 20160524075754) do
   end
 
   create_table "announcements", force: :cascade do |t|
-    t.float    "amount",      limit: 24
-    t.float    "price",       limit: 24
-    t.string   "role",        limit: 255
+    t.float    "amount",       limit: 24
+    t.float    "price",        limit: 24
+    t.string   "role",         limit: 255
     t.datetime "expire"
-    t.boolean  "show",                    default: true
-    t.integer  "user_id",     limit: 4
-    t.integer  "district_id", limit: 4
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.boolean  "show",                     default: true
+    t.integer  "user_id",      limit: 4
+    t.integer  "district_id",  limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "cane_picture", limit: 255
   end
 
   add_index "announcements", ["district_id"], name: "index_announcements_on_district_id", using: :btree

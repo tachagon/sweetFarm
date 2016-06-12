@@ -2,21 +2,11 @@
 
 <div class="container">
 
-  <ol class="breadcrumb">
-    <li>
-      <a href="<%= root_path %>">หน้าแรก</a>
-    </li>
-    <li>
-      <a href="<%= announcements_path(user_id: current_user, role: @announcement.role) %>">
-        <%= "ระบบซื้ออ้อย" if @announcement.role == 'purchase' %>
-        <%= "ระบบขายอ้อย" if @announcement.role == 'sale' %>
-      </a>
-    </li>
-    <li class="active">
-      <%= 'ประกาศซื้ออ้อย' if @announcement.role == 'purchase' %>
-      <%= 'ประกาศขายอ้อย' if @announcement.role == 'sale' %>
-    </li>
-  </ol>
+  <%= generate_breadcrumb({
+    "หน้าแรก": root_path,
+    "ระบบ#{get_announcement_role_th(@announcement.role)}": user_announcements_role_path(user_id: @current_user, announcement_role: @announcement.role),
+    "ประกาศ#{get_announcement_role_th(@announcement.role)}": "active"
+  }) %>
 
   <div class="row">
     <div class="col-md-4 col-md-offset-1">

@@ -1,0 +1,24 @@
+<div class="media">
+  <a class="pull-left" href="<%= announcement.cane_picture.url %>">
+    <!-- <img class="media-object" src="#" alt="Image"> -->
+    <%= image_tag announcement.cane_picture.url, class: "media-object img-responsive", alt: "Image", style: "width: 103.488px; height: 64px;" %>
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">
+      ประกาศ<%= get_announcement_role_th(announcement.role) %>
+      <small>(ID: #<%= announcement.id %>)</small>
+      </h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</div>
