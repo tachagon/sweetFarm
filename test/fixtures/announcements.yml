@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 30.times do |n| %>
+announcement_sale_<%= n %>:
+  amount: 50
+  price: 900
+  role: sale
+  expire: <%= Time.now + 7.days %>
+  show: true
+  user: tatchagon
+  district_id: 7069
+<% end %>
+
+<% 30.times do |n| %>
+announcement_purchase_<%= n %>:
+  amount: 50
+  price: 900
+  role: purchase
+  expire: <%= Time.now + 7.days %>
+  show: true
+  user: pasin
+  district_id: 7069
+<% end %>

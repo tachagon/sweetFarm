@@ -1,0 +1,34 @@
+<%= form_for(@current_user.active_reviews.build) do |f| %>
+  <div>
+    <%= hidden_field_tag :reviewed_id, find_reviewed(deal, @current_user).id %>
+    <%= hidden_field_tag :deal_id, deal.id %>
+  </div>
+
+  <div class="form-group">
+    <div class='starrr' id='star2'></div>
+    <br>
+    <p><span id="show-rating">0</span> ดาว</p>
+    <input type='hidden' name='rating' value='0' id='rating' />
+  </div>
+
+  <div class="form-group">
+      <%= text_area_tag 'comment', nil, class: 'form-control', rows: 5, placeholder: "บอกผู้อื่นเกี่ยวกับ #{find_reviewed(deal, @current_user).name}" %>
+  </div>
+
+  <%= f.submit "รีวิว", class: "btn btn-success btn-lg" %>
+
+<% end %>
+
+<script>
+
+  var $s2input = $('#rating');
+  $('#star2').starrr({
+    max: 5,
+    rating: $s2input.val(),
+    change: function(e, value){
+      e.preventDefault();
+      $s2input.val(value).trigger('input');
+      $('#show-rating').text(value);
+    }
+  });
+</script>

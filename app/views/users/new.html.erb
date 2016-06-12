@@ -21,7 +21,7 @@
         <%=t 'views.users.new.sign_up_with_email' %>
       </div>
       <div class="panel-body">
-        <%= form_for @user, url: users_path(locale: I18n.locale) do |f| %>
+        <%= form_for @user, url: users_path(locale: I18n.locale), html: {multipart: true} do |f| %>
           <%= render partial: 'form', locals: {f: f} %>
         <% end %>
       </div>

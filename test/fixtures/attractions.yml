@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+attraction_1:
+  deal: deal_wait_1
+  announcement: announcement_purchase_1
+
+attraction_2:
+  deal: deal_wait_2
+  announcement: announcement_purchase_2
+
+attraction_3:
+  deal: deal_accepted_1
+  announcement: announcement_sale_1
+
+attraction_4:
+  deal: deal_accepted_2
+  announcement: announcement_purchase_3
+
+
+attraction_5:
+  deal: deal_paid_1
+  announcement: announcement_sale_1
+
+attraction_6:
+  deal: deal_paid_2
+  announcement: announcement_purchase_3

@@ -1,5 +1,25 @@
 module SessionsHelper
 
+  # Confirms a logged-in user.
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = t('please_login')
+      redirect_to login_url
+    end
+  end
+
+  def not_logged_in_user
+    if logged_in?
+      redirect_to root_path
+    end
+  end
+
+  # Confirms an admin user.
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
+
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id

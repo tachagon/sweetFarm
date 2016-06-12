@@ -7,7 +7,8 @@ class UserTest < ActiveSupport::TestCase
       name: "Example User",
       email: "user@example.com",
       password: "foobar",
-      password_confirmation: "foobar")
+      password_confirmation: "foobar",
+      role: 'user')
   end
 
   test "should be valid" do
@@ -76,6 +77,47 @@ class UserTest < ActiveSupport::TestCase
 
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?('')
+  end
+
+  test "role should be user or cane_planter or head_cane_planter or factory" do
+    @user.role = 'user'
+    assert @user.valid?
+
+    @user.role = 'cane_planter'
+    assert @user.valid?
+
+    @user.role = 'head_cane_planter'
+    assert @user.valid?
+
+    @user.role = 'factory'
+    assert @user.valid?
+
+    @user.role = 'invalid role'
+    assert_not @user.valid?
+  end
+
+  test "role should be presence" do
+    @user.role = ''
+    assert_not @user.valid?
+  end
+
+  test "role should default be user" do
+    @user.save
+    assert_equal(@user.role, 'user')
+  end
+
+  test "should review a user" do
+    tatchagon = users(:tatchagon)
+    pasin = users(:pasin)
+    deal = deals(:deal_shipped_1)
+
+    assert_not tatchagon.reviewing?(pasin)
+    assert_difference "Review.count", 1 do
+      tatchagon.review(pasin, deal, 5, "Very good")
+    end
+    assert tatchagon.reviewing?(pasin)
+    assert pasin.reviewers.include?(tatchagon)
+
   end
 
 end

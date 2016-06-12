@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope "(:locale)", :locale => /en|th/ do
+  # scope "(:locale)", :locale => /en|th/ do
     root 'static_pages#index'
 
     get 'login' => 'sessions#new'
@@ -10,9 +10,42 @@ Rails.application.routes.draw do
     get 'page2' => 'static_pages#page2'
     get 'settings' => 'static_pages#settings'
 
-    resources :users
-  end
+    get 'admin/menu' => 'admin#menu'
+    get 'admin/all_sales' => 'admin#all_sales'
+    get 'admin/all_announcements' => 'admin#all_announcements'
+    get 'admin/all_deals' => 'admin#all_deals'
+
+    resources :users do
+      post 'update_role' => 'users#update_role'
+
+      resources :sales
+
+      get 'announcements' => 'announcements#user_announcements', :as => 'announcements'
+      get 'announcements/:announcement_role' => 'announcements#user_announcements_role', :as => 'announcements_role'
+    end
+
+    resources :announcements
+    resources :deals, only: [:index, :show, :create, :destroy] do
+      patch 'update_status_decline_accepted' => 'deals#update_status_decline_accepted'
+      patch 'update_status_paid' => 'deals#update_status_paid'
+      patch 'update_status_shipped' => 'deals#update_status_shipped'
+      resources :messages, only: [:index, :create]
+    end
+    resources :reviews, only: [:create]
+
+  # end
   # resources :users
+
+  resources :provinces do
+    resources :amphurs, only: [:index] do
+      resources :districts, only: [:index]
+    end
+  end
+
+  get 'district' => 'districts#show'
+  get 'districtamphur' => 'districts#show_amphur'
+  get 'districtprovince' => 'districts#show_province'
+
   get 'auth/twitter',   as: 'login_twitter'
   get 'auth/facebook',  as: 'login_facebook'
   get 'auth/google_oauth2', as: 'login_google'

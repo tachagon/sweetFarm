@@ -1,0 +1,142 @@
+<div class="progress" id="progress1">
+    <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+    </div>
+    <span class="progress-type">ความคืบหน้า</span>
+    <span class="progress-completed">20%</span>
+</div>
+
+<div class="row step">
+
+  <div id="step-wait-btn" class="col-md-2 col-md-offset-1">
+    <span class="fa fa-check-square-o"></span>
+    <p>รับข้อเสนอ</p>
+  </div>
+
+  <div id="step-paid-btn" class="col-md-2">
+    <span class="fa fa-money"></span>
+    <p>
+      <% if is_purchaser?(deal, @current_user) %>
+        ชำระเงิน
+      <% else %>
+        รอการชำระเงิน
+      <% end %>
+    </p>
+  </div>
+
+  <div id="step-shipped-btn" class="col-md-2">
+    <span class="fa fa-truck"></span>
+    <p>
+      <% if is_purchaser?(deal, @current_user) %>
+        รอรับสินค้า
+      <% else %>
+        ขนส่งสินค้า
+      <% end %>
+    </p>
+  </div>
+
+  <div id="step-reviewed-btn" class="col-md-2">
+    <span class="fa fa-star"></span>
+    <p>รีวิว</p>
+  </div>
+
+  <div id="step-completed-btn" class="col-md-2">
+    <span class="fa fa-check"></span>
+    <p>สำเร็จ</p>
+  </div>
+
+</div>
+
+<div class="row setup-content step hiddenStepInfo" id="step-wait">
+  <div class="col-xs-12">
+    <div class="col-md-12 well text-center">
+      <h1>ขั้นตอนที่ 1</h1>
+      <h3 class="underline">
+        <% if deal.user == @current_user %>
+          รอการพิจารณาข้อเสนอ
+        <% else %>
+          รับข้อเสนอ
+        <% end %>
+      </h3>
+      <% if deal.user != @current_user %>
+        <a href="<%= deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "decline") %>" data-confirm="คุณต้องการปฏิเสธข้อเสนอ?" data-method="patch" rel="nofollow" class="btn btn-danger col-sm-3 col-sm-offset-3" title="ปฏิเสธข้อเสนอ">ปฏิเสธ</a>
+        <a href="<%= deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "accepted") %>", data-method="patch" rel="nofollow" class="btn btn-success btn-lg col-sm-3" title="รับข้อเสนอ">ตกลง</a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row setup-content step hiddenStepInfo" id="step-decline">
+  <div class="col-xs-12">
+    <div class="col-md-12 well text-center">
+      <h1><i class="fa fa-ban color-danger"></i></h1>
+      <h3 class="underline color-danger">ข้อเสนอถูกปฏิเสธ</h3>
+    </div>
+  </div>
+</div>
+
+<div class="row setup-content step hiddenStepInfo" id="step-paid">
+  <div class="col-xs-12">
+    <div class="col-md-12 well text-center">
+      <h1>ขั้นตอนที่ 2</h1>
+      <h3 class="underline">
+        <% if is_purchaser?(deal, @current_user) %>
+          ชำระเงิน
+        <% else %>
+          รอการชำระเงินจากผู้ซื้อ
+        <% end %>
+      </h3>
+      <% if is_purchaser?(deal, @current_user) %>
+        <a href="<%= deal_update_status_paid_path(deal_id: deal, "deal[status]": "paid") %>" data-method="patch" rel="nofollow" class="btn btn-info" title="ชำระเงิน">
+          ชำระเงิน
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row setup-content step hiddenStepInfo" id="step-shipped">
+  <div class="col-xs-12">
+    <div class="col-md-12 well text-center">
+      <h1>ขั้นตอนที่ 3</h1>
+      <h3 class="underline">
+        <% if is_purchaser?(deal, @current_user) %>
+          รอรับสินค้า
+        <% else %>
+          ขนส่งสินค้า
+        <% end %>
+      </h3>
+      <% if is_purchaser?(deal, @current_user) %>
+        เมื่อได้รับสินค้าแล้วให้คลิกปุ่มรับสินค้าแล้ว <br>
+        <a href="<%= deal_update_status_shipped_path(deal_id: deal, "deal[status]": "shipped") %>" data-method="patch" rel="nofollow" class="btn btn-info" title="ได้รับสินค้าแล้ว">รับสินค้าแล้ว</a>
+      <% else %>
+        ผู้ซื้อชำระเงินเรียบร้อยแล้ว เริ่มขนส่งสินค้าได้เลย
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row setup-content step hiddenStepInfo" id="step-reviewed">
+  <div class="col-xs-12">
+    <div class="col-md-12 well text-center">
+      <h1>ขั้นตอนที่ 4</h1>
+      <h3 class="underline">
+        รีวิว<% if is_purchaser?(deal, @current_user) %>ผู้ขาย<% else %>ผู้ซื้อ<% end %>
+      </h3>
+      <% if review_deal?(deal, @current_user) %>
+        รอรับการรีวิว
+      <% else %>
+        <%= render partial: 'review_form', locals: {deal: deal} %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row setup-content step hiddenStepInfo" id="step-completed">
+  <div class="col-xs-12">
+    <div class="col-md-12 well text-center">
+      <h1><i class="fa fa-check color-success"></i></h1>
+      <h3 class="underline">สำเร็จ</h3>
+      การซื้อขายสำเร็จแล้ว
+    </div>
+  </div>
+</div>

@@ -1,9 +1,59 @@
 <% provide(:title, t('views.static_pages.index.title')) %>
 
-<div class="row">
-
   <% if logged_in? %>
-    <h1>เข้าสู่ระบบแล้ว</h1>
+
+    <div class="jumbotron" id="jumbotron-attraction">
+      <div class="container">
+        <h1>จัดการอ้อยด้วยปลายนิ้ว</h1>
+        <p>เริ่มต้นได้เลย</p>
+        <p>
+          <a href="<%= new_announcement_path(role: 'purchase') %>" class="btn btn-primary btn-lg">ซื้ออ้อย</a>
+          <a href="<%= new_announcement_path(role: 'sale') %>" class="btn btn-warning btn-lg">ขายอ้อย</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row" id="feed-announcements">
+        <!-- <div class="center">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div> -->
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="pull-right">
+          <form id="form-perpage" action="<%= root_path %>" method="get" accept-charset="utf-8">
+            <label for="per_page">จำนวนต่อหน้า</label>
+            <select name="per_page" id="per_page" class="form-control">
+              <option value="12" <%= 'selected' if @per_page == '12' %>>12</option>
+              <option value="24" <%= 'selected' if @per_page == '24' %>>24</option>
+              <option value="36" <%= 'selected' if @per_page == '36' %>>36</option>
+              <option value="60" <%= 'selected' if @per_page == '60' %>>60</option>
+              <option value="84" <%= 'selected' if @per_page == '84' %>>84</option>
+            </select>
+          </form>
+        </div>
+
+        <%= will_paginate @announcements %>
+
+      </div>
+
+      <div class="row">
+
+        <% @announcements.each do |announcement| %>
+          <div class="col-sm-6 col-md4 col-lg-4">
+            <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} %>
+          </div>
+        <% end %>
+
+      </div>
+      <!-- ./row -->
+    </div>
+    <!-- ./container -->
+
   <% else %>
 
   <div class="jumbotron">
@@ -17,15 +67,40 @@
   </div>
   <!-- end jumbotron -->
 
-	<%= link_to 'page2', page2_path(locale: I18n.locale) %>
+
 
   <% end %>
-</div>
 
-<%= fa_icon "camera-retro" %>
+<script type="text/javascript">
 
-<%= fa_stacked_icon "twitter", base: "square-o" %>
+$(document).ready(function () {
+  $('#per_page').on('change', function () {
+    $('#form-perpage').submit();
+  });
+});
 
-<%= fa_stacked_icon "dollar inverse", base: "circle", class: "fa-5x" %>
-<br>
-<%= fa_stacked_icon "terminal inverse", base: "square", class: "pull-right", text: "Hi!" %>
+  // var old_data = {};
+  // setInterval(function () {
+  //   $.getJSON('/announcements.json', function (data) {
+  //     if (JSON.stringify(old_data) === JSON.stringify(data)) {
+  //       console.log('equal');
+  //     } else {
+  //       console.log('not equal');
+  //       var html = "";
+  //       for (var i = 0; i < data.length; i++) {
+  //         var id = data[i]["id"];
+  //         var role = data[i]["role"];
+  //         var amount = data[i]["amount"];
+  //         var price = data[i]["price"];
+  //         var province_name = get_province(data[i].district_id).PROVINCE_NAME;
+  //         var amphur_name = get_amphur(data[i].district_id).AMPHUR_NAME;
+  //         var district_name = get_district(data[i].district_id).DISTRICT_NAME;
+
+  //         html += card_announcement(id, role, amount, price, province_name, amphur_name, district_name);
+  //       }
+  //       document.getElementById("feed-announcements").innerHTML = html;
+  //     }
+  //     old_data = data;
+  //   });
+  // }, 1000);
+</script>

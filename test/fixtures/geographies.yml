@@ -4,8 +4,27 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+
+north:
+  GEO_ID: 1
+  GEO_NAME: ภาคเหนือ
+
+middle:
+  GEO_ID: 2
+  GEO_NAME: ภาคกลาง
+
+east_north:
+  GEO_ID: 3
+  GEO_NAME: ภาคตะวันออกเฉียงเหนือ
+
+west:
+  GEO_ID: 4
+  GEO_NAME: ภาคตะวันตก
+
+east:
+  GEO_ID: 5
+  GEO_NAME: ภาคตะวันออก
+
+south:
+  GEO_ID: 6
+  GEO_NAME: ภาคใต้

@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      flash[:success] = 'เข้าสู่ระบบสำเร็จแล้ว'
       redirect_back_or root_path
     else
       flash.now[:danger] = t('views.sessions.new.error')
@@ -33,6 +34,7 @@ class SessionsController < ApplicationController
       sso_user.save
       redirect_to edit_user_path(id: user, locale: I18n.locale) and return
     end
+    flash[:success] = 'เข้าสู่ระบบสำเร็จแล้ว'
     log_in user
     redirect_back_or root_path
   end

@@ -1,0 +1,31 @@
+<% provide(:title, "All Announcement") %>
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li>
+      <a href="<%= root_path %>">หน้าแรก</a>
+    </li>
+    <li class="active">
+      <% if @role == 'purchase' %>
+        ระบบซื้ออ้อย
+      <% elsif @role == 'sale' %>
+        ระบบขายอ้อย
+      <% else %>
+        ระบบประกาศซื้อขาย
+      <% end %>
+    </li>
+  </ol>
+
+  <div class="row">
+
+    <div class="page-header">
+      <h1>ประกาศ<%= "ซื้ออ้อย" if @role == 'purchase' %><%= "ขายอ้อย" if @role == 'sale' %>ทั้งหมด
+      <small><%= @announcements.count %> ประกาศ</small></h1>
+    </div>
+
+    <%= render partial: 'announcements/announcement', collection: @announcements %>
+
+  </div>
+  <!-- ./row -->
+</div>

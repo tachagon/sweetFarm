@@ -1,0 +1,50 @@
+<div class="well">
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :amount %>
+    <div class="input-group">
+      <%= number_field :deal, :amount, min: 1, max: announcement.amount, class: 'form-control', onkeyup: 'show_result()', value: announcement.amount %>
+      <div class="input-group-addon">ตัน</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price %>
+    <div class="input-group">
+      <%= number_field :deal, :price, min: 1, class: 'form-control', onkeyup: 'show_result()', value: announcement.price %>
+      <div class="input-group-addon">บาท / ตัน</div>
+    </div>
+    <span class="help-block" id="result-price">ราคารวม 0 บาท</span>
+  </div>
+
+  <%= f.submit 'เสนอขาย', class: 'btn btn-warning btn-block' if announcement.role == 'purchase' %>
+  <%= f.submit "เสนอซื้อ", class: 'btn btn-primary btn-block' if announcement.role == 'sale' %>
+
+  <span class="help-block center">ข้อเสนอนี้จะมีอายุ 3 วัน</span>
+
+</div>
+<!-- ./well -->
+
+<script type="text/javascript">
+  var show_result = function() {
+    $(document).ready(function(){
+      var amount = $('#deal_amount').val();
+      var price = $('#deal_price').val();
+      var result = amount*price;
+      $('#result-price').text("ราคารวม " + result + " บาท").digits();
+    });
+  }
+
+  $(document).ready(function() {
+
+    show_result();
+
+  });
+</script>
+
+<style type="text/css">
+  #result-price{
+    color: orange;
+  }
+</style>
