@@ -57,8 +57,28 @@
 
     <% if announcement.expire >= Time.now %>
       <p class="center" style="color: gray;">
-        หมดอายุในอีก <%= distance_of_time_in_words_to_now(announcement.expire) %>
+        <!-- หมดอายุในอีก <%#= distance_of_time_in_words_to_now(announcement.expire) %> -->
       </p>
+      <div class="row">
+      <div class="clockdiv col-xs-12 col-sm-12 col-md-12 col-lg-12" id="clockdiv_<%= announcement.id %>">
+        <div>
+          <span class="days"></span>
+          <div class="smalltext">วัน</div>
+        </div>
+        <div>
+          <span class="hours"></span>
+          <div class="smalltext">ชั่วโมง</div>
+        </div>
+        <div>
+          <span class="minutes"></span>
+          <div class="smalltext">นาที</div>
+        </div>
+        <div>
+          <span class="seconds"></span>
+          <div class="smalltext">วินาที</div>
+        </div>
+      </div>
+      </div>
     <% else %>
       <p class="center" style="color: red;">หมดอายุแล้ว</p>
     <% end %>
@@ -85,4 +105,11 @@
 
 <script type="text/javascript">
   show_rating("show_rating_<%= announcement.id %>", <%= get_rating_avg(announcement.user) %>);
+
+  var deadline = "<%= "#{announcement.expire.year}-#{announcement.expire.month}-#{announcement.expire.day} #{announcement.expire.hour}:#{announcement.expire.min}:#{announcement.expire.sec}" %>";
+
+  initializeClock('clockdiv_<%= announcement.id %>', deadline);
+
+  console.log("<%= announcement.id %> -- " + deadline + " -- " + "<%= announcement.expire %>");
+  console.log("============");
 </script>
