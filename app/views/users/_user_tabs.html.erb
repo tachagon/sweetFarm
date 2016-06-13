@@ -19,10 +19,34 @@
   <!-- Tab panes -->
   <div class="tab-content">
 
-    <div role="tabpanel" class="tab-pane active" id="announcement-purchase">1</div>
+    <div role="tabpanel" class="tab-pane active" id="announcement-purchase">
+      <div class="row">
+        <% @announcements_purchase.each do |announcement| %>
+          <div class="col-sm-6 col-md-4 col-lg-4">
+            <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-    <div role="tabpanel" class="tab-pane" id="announcement-sale">2</div>
-    <div role="tabpanel" class="tab-pane" id="review">3</div>
+    <div role="tabpanel" class="tab-pane" id="announcement-sale">
+      <div class="row">
+        <% @announcements_sale.each do |announcement| %>
+          <div class="col-sm-6 col-md-4 col-lg-4">
+            <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="review">
+      <div class="row">
+        <% @reviews.each do |review| %>
+          <div class="col-md-12">
+            <%= render partial: "reviews/review", locals: {review: review} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
   </div>
 </div>

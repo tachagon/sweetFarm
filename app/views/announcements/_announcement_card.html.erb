@@ -80,7 +80,7 @@
       </div>
       </div>
     <% else %>
-      <p class="center" style="color: red;">หมดอายุแล้ว</p>
+      <p class="center" style="color: red; margin-bottom: 75px;">หมดอายุแล้ว</p>
     <% end %>
 
     <% if announcement.user != current_user %>
@@ -104,12 +104,11 @@
 <!-- ./thumbnail -->
 
 <script type="text/javascript">
+
   show_rating("show_rating_<%= announcement.id %>", <%= get_rating_avg(announcement.user) %>);
 
   var deadline = "<%= "#{announcement.expire.year}-#{announcement.expire.month}-#{announcement.expire.day} #{announcement.expire.hour}:#{announcement.expire.min}:#{announcement.expire.sec}" %>";
 
   initializeClock('clockdiv_<%= announcement.id %>', deadline);
 
-  console.log("<%= announcement.id %> -- " + deadline + " -- " + "<%= announcement.expire %>");
-  console.log("============");
 </script>

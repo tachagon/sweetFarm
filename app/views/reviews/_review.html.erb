@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <div class="media">
+      <a class="pull-left" href="#">
+        <!-- <img class="media-object" src="#" alt="Image"> -->
+        <%= image_tag review.reviewer.picture.url, class: "media-object", alt: "Image", style: "width: 50px; height: 50px;" %>
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= review.reviewer.name %>
+        </h4>
+        <p id="rating_<%= review.id %>" style="color: #FFD119;">
+
+        </p>
+        <p>
+          <%= review.comment %>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  show_rating("rating_<%= review.id %>", <%= review.rating %>);
+</script>

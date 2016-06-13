@@ -11,4 +11,6 @@ class Review < ActiveRecord::Base
   validates :rating, presence: true, numericality: {only_integer: true ,greater_than: 0, less_than_or_equal_to: 5}
   validates :comment, presence: true
 
+  scope :recent, -> {order('created_at DESC')}
+
 end

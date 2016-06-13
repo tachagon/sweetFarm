@@ -10,6 +10,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+
+    @announcements_sale = @user.announcements.role("sale").recent
+    @announcements_purchase = @user.announcements.role("purchase").recent
+    @reviews = @user.passive_reviews.recent
+
     unless @user
       flash[:danger] = t('controllers.users.show.danger')
       redirect_to root_path
