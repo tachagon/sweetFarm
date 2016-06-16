@@ -36,6 +36,22 @@
     <%= I18n.localize(announcement.expire, format: :long) %>
   </td>
 
+  <td class="center">
+    <% if accept_announcement?(announcement) %>
+      <p class="center" style="color: green;">
+        <%= get_deal_status(announcement) %>
+      </p>
+    <% elsif announcement.expire >= Time.now %>
+      <p class="center" style="color: gray;">
+        กำลังดำเนินการ
+      </p>
+    <% else %>
+      <p class="center" style="color: red;">
+        หมดอายุแล้ว
+      </p>
+    <% end %>
+  </td>
+
   <td>
     <div class="center">
       <%= link_to 'ดูข้อมูล', announcement %>

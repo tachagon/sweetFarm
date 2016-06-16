@@ -23,6 +23,7 @@ class Announcement < ActiveRecord::Base
   scope :not_expired, -> {where("expire >= NOW() - INTERVAL 7 HOUR")}
   scope :show, -> {where(show: true)}
   scope :recent, -> {order('updated_at DESC')}
+  scope :auction_recent, -> {order('expire ASC')}
   scope :user, -> (user_id){where(user: user_id)}
   scope :other_user, -> (user_id){where("user_id != #{user_id}")}
   scope :role, -> (role){where(role: role)}
