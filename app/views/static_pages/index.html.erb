@@ -1,75 +1,14 @@
 <% provide(:title, t('views.static_pages.index.title')) %>
 
-  <% if logged_in? %>
+<% if logged_in? %>
 
-    <div class="jumbotron" id="jumbotron-attraction">
-      <div class="container">
-        <h1>จัดการอ้อยด้วยปลายนิ้ว</h1>
-        <p>เริ่มต้นได้เลย</p>
-        <p>
-          <a href="<%= new_announcement_path(role: 'purchase') %>" class="btn btn-primary btn-lg">ซื้ออ้อย</a>
-          <a href="<%= new_announcement_path(role: 'sale') %>" class="btn btn-warning btn-lg">ขายอ้อย</a>
-        </p>
-      </div>
-    </div>
+  <%= render partial: "index_logged_in", locals: {announcements: @announcements} %>
 
-    <div class="container">
+<% else %>
 
-      <div class="row" id="feed-announcements">
-        <!-- <div class="center">
-          <i class="fa fa-spinner fa-pulse fa-5x"></i>
-        </div> -->
-      </div>
+  <%= render partial: "index_not_logged_in" %>
 
-      <hr>
-
-      <div class="row">
-        <div class="pull-right">
-          <form id="form-perpage" action="<%= root_path %>" method="get" accept-charset="utf-8">
-            <label for="per_page">จำนวนต่อหน้า</label>
-            <select name="per_page" id="per_page" class="form-control">
-              <option value="12" <%= 'selected' if @per_page == '12' %>>12</option>
-              <option value="24" <%= 'selected' if @per_page == '24' %>>24</option>
-              <option value="36" <%= 'selected' if @per_page == '36' %>>36</option>
-              <option value="60" <%= 'selected' if @per_page == '60' %>>60</option>
-              <option value="84" <%= 'selected' if @per_page == '84' %>>84</option>
-            </select>
-          </form>
-        </div>
-
-        <%= will_paginate @announcements %>
-
-      </div>
-
-      <div class="row">
-
-        <% @announcements.each do |announcement| %>
-          <div class="col-sm-6 col-md4 col-lg-4">
-            <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} %>
-          </div>
-        <% end %>
-
-      </div>
-      <!-- ./row -->
-    </div>
-    <!-- ./container -->
-
-  <% else %>
-
-  <div class="jumbotron">
-    <div class="container">
-      <h1><%=t 'views.static_pages.index.jumbotron.welcome' %></h1>
-      <p><%=t 'views.static_pages.index.jumbotron.content' %></p>
-      <p>
-        <%= link_to t('sign_up'), new_user_path, class: "btn btn-primary btn-lg" %>
-      </p>
-    </div>
-  </div>
-  <!-- end jumbotron -->
-
-
-
-  <% end %>
+<% end %>
 
 <script type="text/javascript">
 

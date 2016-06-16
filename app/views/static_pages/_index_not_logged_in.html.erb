@@ -1,0 +1,58 @@
+<% provide(:user_form_button, t('sign_up')) %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#fullpage').fullpage({
+      sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE'],
+      anchors: ['firstPage', 'secondPage', '3rdPage'],
+      menu: '#menu',
+      loopTop: true,
+      loopBottom: true
+    });
+  });
+</script>
+
+<ul id="menu">
+
+  <li data-menuanchor="firstPage" class="active">
+    <a href="#firstPage">หน้าแรก</a>
+  </li>
+
+  <li data-menuanchor="secondPage">
+    <a href="#secondPage">สมัครสมาชิก</a>
+  </li>
+
+  <li data-menuanchor="3rdPage">
+    <a href="#3rdPage">เข้าสู่ระบบ</a>
+  </li>
+
+</ul>
+
+<div id="fullpage">
+
+  <div class="section " id="section0">
+    <h1 class="index">Sweet Farm</h1>
+    <p class="index">ระบบจัดการอ้อยด้วยปลายนิ้วแห่งแรกในประเทศไทย :)</p>
+  </div>
+
+  <div class="section" id="section1">
+    <div class="intro">
+      <h1 class="index">สมัครสมาชิก</h1>
+      <p class="index">ร่วมเป็นส่วนหนึ่งกับเราฟรี</p>
+      <a class="btn btn-lg btn-index" href="<%= new_user_path %>" title="สมัครสมาชิก">
+        สมัครเลย!
+      </a>
+    </div>
+  </div>
+
+  <div class="section" id="section2">
+    <div class="intro">
+      <h1 class="index">เข้าสู่ระบบ</h1>
+      <p class="index">เริ่มต้นจัดการอ้อยด้วยปลายนิ้ว</p>
+      <a class="btn btn-lg btn-index" href="<%= login_path %>" title="เข้าสู่ระบบ">
+        เข้าสู่ระบบเลย!
+      </a>
+    </div>
+  </div>
+
+</div>

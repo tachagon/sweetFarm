@@ -55,40 +55,53 @@
     </div>
     <!-- ./media -->
 
-    <% if announcement.expire >= Time.now %>
-      <p class="center" style="color: gray;">
-        <!-- หมดอายุในอีก <%#= distance_of_time_in_words_to_now(announcement.expire) %> -->
+    <% if accept_announcement?(announcement) %>
+
+      <p class="center" style="color: green; margin-bottom: 65px;">
+        <%= get_deal_status(announcement) %>
       </p>
+
+    <% elsif announcement.expire >= Time.now %>
+
+      <!-- <p class="center" style="color: gray;">
+        หมดอายุในอีก <%#= distance_of_time_in_words_to_now(announcement.expire) %>
+      </p> -->
       <div class="row">
-      <div class="clockdiv col-xs-12 col-sm-12 col-md-12 col-lg-12" id="clockdiv_<%= announcement.id %>">
-        <div>
-          <span class="days"></span>
-          <div class="smalltext">วัน</div>
-        </div>
-        <div>
-          <span class="hours"></span>
-          <div class="smalltext">ชั่วโมง</div>
-        </div>
-        <div>
-          <span class="minutes"></span>
-          <div class="smalltext">นาที</div>
-        </div>
-        <div>
-          <span class="seconds"></span>
-          <div class="smalltext">วินาที</div>
+        <div class="clockdiv col-xs-12 col-sm-12 col-md-12 col-lg-12" id="clockdiv_<%= announcement.id %>">
+          <div>
+            <span class="days"></span>
+            <div class="smalltext">วัน</div>
+          </div>
+          <div>
+            <span class="hours"></span>
+            <div class="smalltext">ชั่วโมง</div>
+          </div>
+          <div>
+            <span class="minutes"></span>
+            <div class="smalltext">นาที</div>
+          </div>
+          <div>
+            <span class="seconds"></span>
+            <div class="smalltext">วินาที</div>
+          </div>
         </div>
       </div>
-      </div>
+
     <% else %>
-      <p class="center" style="color: red; margin-bottom: 75px;">หมดอายุแล้ว</p>
+
+      <p class="center" style="color: red; margin-bottom: 65px;">หมดอายุแล้ว</p>
+
     <% end %>
 
     <% if announcement.user != current_user %>
-      <a href="<%= announcement_path(announcement) %>" title="ยื่นข้อเสนอ" class="btn btn-block btn-<%= announcement.role %>-deal" <%= "disabled='disabled'" if announcement.expire < Time.now %>>
+
+      <a href="<%= announcement_path(announcement) %>" title="ยื่นข้อเสนอ" class="btn btn-block btn-<%= announcement.role %>-deal" <%= "disabled='disabled'" if announcement.expire < Time.now || accept_announcement?(announcement) %>>
         <%= "เสนอขาย" if announcement.role == 'purchase' %>
         <%= "เสนอซื้อ" if announcement.role == 'sale' %>
       </a>
+
     <% else %>
+
       <div class="row">
         <div class="col-sm-12">
           <a href="<%= edit_announcement_path(announcement) %>" class="btn btn-default btn-block">
@@ -97,6 +110,7 @@
           </a>
         </div>
       </div>
+
     <% end %>
 
   </a>
