@@ -1,18 +1,14 @@
 <div class="well">
   <%= render 'shared/error_messages', object: f.object %>
 
-  <div class="form-group">
-    <%= f.label :amount %>
-    <div class="input-group">
-      <%= number_field :deal, :amount, min: 1, max: announcement.amount, class: 'form-control', onkeyup: 'show_result()', value: announcement.amount %>
-      <div class="input-group-addon">ตัน</div>
-    </div>
-  </div>
+
+      <%= hidden_field :deal, :amount, value: announcement.amount %>
+
 
   <div class="form-group">
     <%= f.label :price %>
     <div class="input-group">
-      <%= number_field :deal, :price, min: 1, class: 'form-control', onkeyup: 'show_result()', value: announcement.price %>
+      <%= number_field :deal, :price, min: 1, class: 'form-control', onkeyup: 'show_result()', value: number_with_precision(announcement.price, precision: 0) %>
       <div class="input-group-addon">บาท / ตัน</div>
     </div>
     <span class="help-block" id="result-price">ราคารวม 0 บาท</span>

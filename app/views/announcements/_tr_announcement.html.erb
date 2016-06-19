@@ -17,15 +17,15 @@
   </td>
 
   <td class="right">
-    <%= number_with_delimiter(number_with_precision(announcement.amount, precision: 3), delimiter: ',') %>
+    <%= number_with_delimiter(number_with_precision(announcement.amount, precision: 0), delimiter: ',') %>
   </td>
 
   <td class="right">
-    <%= number_with_delimiter(number_with_precision(announcement.price, precision: 2), delimiter: ',') %>
+    <%= number_with_delimiter(number_with_precision(announcement.price, precision: 0), delimiter: ',') %>
   </td>
 
   <td class="right">
-    <%= number_with_delimiter(number_with_precision(announcement.price * announcement.amount, precision: 2), delimiter: ',') %>
+    <%= number_with_delimiter(number_with_precision(announcement.price * announcement.amount, precision: 0), delimiter: ',') %>
   </td>
 
   <td class="center">
