@@ -69,4 +69,17 @@ module DealsHelper
     return false
   end
 
+  # if user accepted a deal
+  # then status of other deals of same announcement should be decline
+  def decline_others_deal(announcements, deal_accepted_id)
+    announcements.each do |announcement|
+      announcement.deals.each do |deal|
+        if deal.id != deal_accepted_id
+          deal.status = 'decline'
+          deal.save
+        end
+      end
+    end
+  end
+
 end

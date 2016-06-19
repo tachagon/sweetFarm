@@ -1,5 +1,6 @@
 class DealsController < ApplicationController
   include DealsHelper
+  include AnnouncementsHelper
 
   before_action :logged_in_user
   before_action :get_deal, only: [:show, :destroy, :update_status_decline_accepted, :update_status_paid, :update_status_shipped]
@@ -38,6 +39,7 @@ class DealsController < ApplicationController
 
     redirect_to announcement_path(@announcement) and return if @announcement.user == current_user || @announcement.expire < Time.now
     redirect_to announcement_path(@announcement) and return if params[:deal][:amount].to_f > @announcement.amount
+    redirect_to announcement_path(@announcement) and return if accept_announcement?(@announcement)
 
     if @deal.save
       @deal.reload
@@ -60,8 +62,12 @@ class DealsController < ApplicationController
   def update_status_decline_accepted
     if @deal.expire >= Time.now && @deal.status == 'wait' && @deal.update_attributes(deal_status_params)
       @deal.reload
-      flash[:success] = "รับข้อเสนอแล้ว" if @deal.status == "accepted"
-      flash[:success] = 'ปฏิเสธข้อเสนอแล้ว' if @deal.status == "decline"
+      if @deal.status == "accepted"
+        flash[:success] = "รับข้อเสนอแล้ว"
+        decline_others_deal(@deal.announcements, @deal.id)
+      elsif @deal.status == "decline"
+        flash[:success] = 'ปฏิเสธข้อเสนอแล้ว'
+      end
       redirect_to deal_path(@deal)
     else
       flash[:danger] = 'ไม่สามารถดำเนินการได้'

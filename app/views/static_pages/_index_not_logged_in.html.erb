@@ -1,36 +1,81 @@
 <% provide(:user_form_button, t('sign_up')) %>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $(document).ready(function() {
     $('#fullpage').fullpage({
-      sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE'],
-      anchors: ['firstPage', 'secondPage', '3rdPage'],
-      menu: '#menu',
-      loopTop: true,
-      loopBottom: true
+      sectionsColor: ['#1bbc9b'],
+      anchors: ['firstPage'],
+      menu: '#menu'
     });
   });
-</script>
+</script> -->
+
+<style type="text/css" media="screen">
+  body {
+    background-color: #1bbc9b;
+  }
+  .jumbotron {
+    background-color: #1bbc9b;
+  }
+  h1.myindex {
+    text-align: center;
+    color: #fff;
+  }
+  p.myindex {
+    text-align: center;
+    color: #333;
+  }
+</style>
 
 <ul id="menu">
 
   <li data-menuanchor="firstPage" class="active">
-    <a href="#firstPage">หน้าแรก</a>
+    <a href="<%= root_path %>">หน้าแรก</a>
   </li>
 
   <li data-menuanchor="secondPage">
-    <a href="#secondPage">สมัครสมาชิก</a>
+    <a href="<%= new_user_path %>">สมัครสมาชิก</a>
   </li>
 
   <li data-menuanchor="3rdPage">
-    <a href="#3rdPage">เข้าสู่ระบบ</a>
+    <a href="<%= login_path %>">เข้าสู่ระบบ</a>
   </li>
 
 </ul>
 
-<div id="fullpage">
+<div class="jumbotron">
+  <div class="container-fluid mysection">
+    <h1 class="myindex">Sweet Farm</h1>
+    <p class="myindex">ระบบจัดการอ้อยด้วยปลายนิ้วแห่งแรกในประเทศไทย :)</p>
+  </div>
+</div>
 
-  <div class="section " id="section0">
+<script type="text/javascript">
+  $(document).ready(function () {
+    var window_hei = $(window).height();
+    var menu_hei = $("#menu").height();
+    var jumbotron_hei = window_hei - menu_hei;
+    var hei = jumbotron_hei + "px";
+
+    $(".jumbotron").css('height', hei);
+
+    var text_hei = $("h1.myindex").height() + $("p.myindex").height();
+    var pt = ((window_hei - text_hei) / 2) - menu_hei - (text_hei / 2);
+    var pt_px = pt + "px";
+
+    $("h1.myindex").css('margin-top', pt_px);
+
+    console.log("window: " + window_hei);
+    console.log("menu: " + menu_hei);
+    console.log("jumbotron: " + jumbotron_hei);
+    console.log("text: " + text_hei);
+    console.log("pt: " + pt_px);
+  });
+</script>
+
+<!-- <div id="fullpage">
+
+  <div class="section" id="section0">
     <h1 class="index">Sweet Farm</h1>
     <p class="index">ระบบจัดการอ้อยด้วยปลายนิ้วแห่งแรกในประเทศไทย :)</p>
   </div>
@@ -55,4 +100,4 @@
     </div>
   </div>
 
-</div>
+</div> -->

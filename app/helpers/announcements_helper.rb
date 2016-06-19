@@ -1,5 +1,13 @@
 module AnnouncementsHelper
 
+  def expired?(announcement)
+    if announcement.expire >= Time.now
+      return false
+    else
+      return true
+    end
+  end
+
   def get_announcement_role_th(role)
     if role == "sale"
       "ขายอ้อย"
