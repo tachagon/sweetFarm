@@ -1,0 +1,39 @@
+<canvas id="deal_price_chart" width="100" height="100"></canvas>
+
+<script type="text/javascript">
+  var ctx2 = $("#deal_price_chart");
+
+  var deal_price_array = [];
+  var keys = <%= deals.keys %>;
+  var values = <%= deals.values %>;
+  for (var i = 0; i < <%= deals.count %>; i++) {
+    deal_price_array[i] = {x: keys[i], y: values[i]};
+  }
+
+  var deal_price_data = {
+    datasets: [{
+      label: "จำนวนข้อเสนอที่สำเร็จ",
+      // backgroundColor: "#5cb85c",
+      data: deal_price_array
+    }]
+  };
+
+  var deal_price_option = {
+        scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom'
+            }],
+            yAxes: [{
+              type: 'linear',
+              position: 'left'
+            }]
+        }
+    };
+
+  var deal_price_chart = new Chart(ctx2, {
+    type: 'line',
+    data: deal_price_data,
+    options: deal_price_option
+  });
+</script>

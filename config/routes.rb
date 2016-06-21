@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     end
     resources :reviews, only: [:create]
 
+    get 'analytics' => 'analytics#index'
+    get 'announcement/analytics/' => 'analytics#announcement_analytics', as: "announcement_analytics"
+
   # end
   # resources :users
 

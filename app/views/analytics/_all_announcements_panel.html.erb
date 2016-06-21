@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    ประกาศซื้อ <%= number_with_precision(announcements.role("purchase").count * 100.0 / announcements.count, precision: 2) %>%
+    <small>(<%= announcements.role("purchase").count %> ประกาศ)</small>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    ประกาศขาย <%= number_with_precision(announcements.role("sale").count * 100.0 / announcements.count, precision: 2) %>%
+    <small>(<%= announcements.role("sale").count %> ประกาศ)</small>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    รวม <%= announcements.count %> ประกาศ
+  </div>
+</div>

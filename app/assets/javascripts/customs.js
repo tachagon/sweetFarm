@@ -8,7 +8,7 @@ var option_province = function (target_id) {
       dataType: "json",
       url: "/provinces",
       success: function(data){
-          var option = "";
+          var option = "<option value=''></option>";
           for (var i = 0; i < data.length; i++) {
               option += "<option value=\'" + data[i]["PROVINCE_ID"] + "\'>";
               option += data[i]["PROVINCE_NAME"] + "</option>";
@@ -25,8 +25,7 @@ var option_amphur = function (target_id, province_id) {
     dataType: "json",
     url: url,
     success: function(data){
-      console.log(data);
-      var option = "<option>เลือกอำเภอ</option>";
+      var option = "<option value=''>เลือกอำเภอ</option>";
       for (var i = 0; i < data.length; i++) {
           option += "<option value=\'" + data[i]["AMPHUR_ID"] + "\'>";
           option += data[i]["AMPHUR_NAME"] + "</option>";
@@ -43,8 +42,7 @@ var option_district = function (target_id, province_id, amphur_id) {
     dataType: "json",
     url: url,
     success: function(data){
-      console.log(data);
-      var option = "<option>เลือกตำบล</option>";
+      var option = "<option value=''>เลือกตำบล</option>";
       for (var i = 0; i < data.length; i++) {
           option += "<option value=\'" + data[i]["DISTRICT_ID"] + "\'>";
           option += data[i]["DISTRICT_NAME"] + "</option>";

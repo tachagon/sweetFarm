@@ -27,6 +27,8 @@ class Announcement < ActiveRecord::Base
   scope :user, -> (user_id){where(user: user_id)}
   scope :other_user, -> (user_id){where("user_id != #{user_id}")}
   scope :role, -> (role){where(role: role)}
+  scope :last_days, -> (days){where("created_at >= NOW() - INTERVAL #{days} DAY")}
+  scope :price, -> (min, max){where("price >= #{min} AND price <= #{max}")}
 
   private
     def cane_picture_size
