@@ -16,6 +16,7 @@ gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'font-awesome-rails'
 gem 'select2-rails'
+gem 'chart-js-rails'
 
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'

@@ -23,7 +23,10 @@ class Deal < ActiveRecord::Base
   scope :not_expired, -> {where('expire >= NOW()')}
   scope :user, -> (user_id){where(user: user_id)}
   scope :status, -> (status){where(status: status)}
+  scope :status_success, -> {where("status = 'accepted' OR status = 'paid' OR status = 'shipped' OR status = 'reviewed' OR status = 'completed'")}
   scope :recent, -> {order('updated_at DESC')}
   scope :best_price, -> {order('price DESC')}
   scope :best_amount, -> {order('amount DESC')}
+  scope :last_days, -> (days){where("created_at >= NOW() - INTERVAL #{days} DAY")}
+  scope :price, -> (min, max){where("price >= #{min} AND price <= #{max}")}
 end

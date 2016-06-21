@@ -1,0 +1,50 @@
+<% provide(:title, "วิเคราะห์ข้อมูล #{@last_days} วัน") %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= render partial: "last_days_form" %>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-sm-4 col-sm-offset-2">
+          <%= render partial: "all_announcements_chart", locals: {announcements: @announcements} %>
+        </div>
+
+        <div class="col-sm-4">
+          <%= render partial: "all_announcements_panel", locals: {announcements: @announcements} %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="col-sm-4 col-sm-offset-2">
+        <%= render partial: "deal_price_chart", locals: {deals: @deals_hash} %>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            ราคาแนะนำ <%= delimiter(no_precision(suggestion_price(@deals_hash))) %> บาท/ตัน<br>
+            <small>(<%= number_with_precision(@deals_hash[suggestion_price(@deals_hash)] * 100.0 / @deals.count, precision: 2) %>% ของข้อเสนอที่สำเร็จทั้งหมด)</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  </div>
+
+</div>

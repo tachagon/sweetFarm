@@ -13,4 +13,12 @@ module ApplicationHelper
     return(output.html_safe)
   end
 
+  def no_precision(num)
+    return number_with_precision(num, precision: 0)
+  end
+
+  def delimiter(num)
+    return number_with_delimiter(num, delimiter: ",")
+  end
+
 end

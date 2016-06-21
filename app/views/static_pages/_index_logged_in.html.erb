@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
 
   <div class="row" id="feed-announcements">
     <!-- <div class="center">
@@ -21,31 +21,49 @@
 
   <div class="row">
     <div class="pull-right">
-      <form id="form-perpage" action="<%= root_path %>" method="get" accept-charset="utf-8">
+      <form id="form-perpage" action="<%= root_path %>" method="get" accept-charset="utf-8" class="form-inline">
+
+        <div class="form-group">
         <label for="per_page">จำนวนต่อหน้า</label>
-        <select name="per_page" id="per_page" class="form-control">
-          <option value="12" <%= 'selected' if @per_page == '12' %>>12</option>
-          <option value="24" <%= 'selected' if @per_page == '24' %>>24</option>
-          <option value="36" <%= 'selected' if @per_page == '36' %>>36</option>
-          <option value="60" <%= 'selected' if @per_page == '60' %>>60</option>
-          <option value="84" <%= 'selected' if @per_page == '84' %>>84</option>
-        </select>
+          <select name="per_page" id="per_page" class="form-control">
+            <option value="12" <%= 'selected' if @per_page == '12' %>>12</option>
+            <option value="24" <%= 'selected' if @per_page == '24' %>>24</option>
+            <option value="36" <%= 'selected' if @per_page == '36' %>>36</option>
+            <option value="60" <%= 'selected' if @per_page == '60' %>>60</option>
+            <option value="84" <%= 'selected' if @per_page == '84' %>>84</option>
+          </select>
+        </div>
+
       </form>
     </div>
 
-    <%= will_paginate announcements %>
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= will_paginate announcements %>
+    </div>
 
   </div>
 
   <div class="row">
 
-    <% announcements.each do |announcement| %>
-      <div class="col-sm-6 col-md4 col-lg-4">
-        <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} %>
-      </div>
-    <% end %>
+    <div class="col-sm-3">
+      <%= render partial: "filter" %>
+    </div>
+
+    <div class="col-sm-9">
+      <% announcements.each do |announcement| %>
+        <div class="col-sm-6 col-md4 col-lg-4 announcement <%= announcement.role %> province-<%= announcement.district.province.id %>">
+          <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} if !accept_announcement?(announcement) %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= will_paginate announcements %>
+    </div>
 
   </div>
   <!-- ./row -->
 </div>
 <!-- ./container -->
+
+
