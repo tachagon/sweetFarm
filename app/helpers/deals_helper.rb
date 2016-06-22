@@ -23,6 +23,7 @@ module DealsHelper
       color = "green"
     elsif deal.status == "completed"
       word = "ซื้อขายสำเร็จแล้ว"
+      color = "green"
     end
     content_tag(:p, word, style: "color: #{color};", class: "center")
   end

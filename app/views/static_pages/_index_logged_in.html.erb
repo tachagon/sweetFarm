@@ -51,9 +51,11 @@
 
     <div class="col-sm-9">
       <% announcements.each do |announcement| %>
-        <div class="col-sm-6 col-md4 col-lg-4 announcement <%= announcement.role %> province-<%= announcement.district.province.id %>">
-          <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} if !accept_announcement?(announcement) %>
-        </div>
+        <% if !accept_announcement?(announcement) %>
+          <div class="col-sm-6 col-md4 col-lg-4 announcement">
+            <%= render partial: 'announcements/announcement_card', locals: {announcement: announcement} %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 

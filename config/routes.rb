@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
       get 'announcements' => 'announcements#user_announcements', :as => 'announcements'
       get 'announcements/:announcement_role' => 'announcements#user_announcements_role', :as => 'announcements_role'
+
+      get 'send_deals' => 'deals#user_send_deals'
+      get 'receive_deals' => 'deals#user_receive_deals'
     end
 
     resources :announcements

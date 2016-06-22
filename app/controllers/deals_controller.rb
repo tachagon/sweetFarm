@@ -20,6 +20,33 @@ class DealsController < ApplicationController
     end
   end
 
+  def user_send_deals
+    @user = User.find_by_id(params[:user_id])
+    @deals = @user.deals.recent.recent.paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.json{render json: @deals}
+    end
+  end
+
+  def user_receive_deals
+    @user = User.find_by_id(params[:user_id])
+    @announcements = @user.announcements.recent
+
+    @deals = @announcements.first.deals
+    @announcements.each do |announcement|
+      @deals += announcement.deals
+    end
+
+    @num_deals = @deals.count
+    @deals = @deals.paginate(page: params[:page], per_page: 10)
+
+    respond_to do |format|
+      format.html
+      format.json{render json: @deals}
+    end
+  end
+
   def show
     @announcements = @deal.announcements
     @announcement = @announcements.first
