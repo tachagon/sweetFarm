@@ -17,6 +17,10 @@ module ApplicationHelper
     return number_with_precision(num, precision: 0)
   end
 
+  def precision(num, digit)
+    return number_with_precision(num, precision: digit)
+  end
+
   def delimiter(num)
     return number_with_delimiter(num, delimiter: ",")
   end

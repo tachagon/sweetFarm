@@ -1,0 +1,77 @@
+<!-- Modal -->
+<div class="modal fade" id="paidModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">ข้อมูลการชำระเงิน</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-horizontal">
+
+          <div class="form-group">
+            <label for="cardholder" class="col-sm-4 control-label">Cardholder's Name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="cardholder">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="creditCardNum" class="col-sm-4 control-label">Credit Card Number</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="" value="" placeholder="" id="creditCardNum">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ccvCode" class="col-sm-4 control-label">CCV Code</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" max="3" name="" value="" placeholder="" id="ccvCode">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="expire" class="col-sm-4 control-label">Expire Date</label>
+            <div class="col-sm-8">
+              <select class="form-control">
+                <option>Month</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+
+              <select class="form-control">
+                <option>Year</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+              </select>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+        <a href="<%= deal_update_status_paid_path(deal_id: deal, "deal[status]": "paid") %>" data-method="patch" rel="nofollow" class="btn btn-info" title="ชำระเงิน">
+          ชำระเงิน
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
