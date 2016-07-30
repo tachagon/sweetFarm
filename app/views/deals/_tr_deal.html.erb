@@ -1,0 +1,47 @@
+<tr>
+
+  <td>
+    #<%= deal.id %>
+  </td>
+
+ <td class="right">
+    <%= number_with_delimiter(number_with_precision(deal.amount, precision: 0), delimiter: ',') %>
+  </td>
+
+  <td class="right">
+    <%= number_with_delimiter(number_with_precision(deal.price, precision: 0), delimiter: ',') %>
+  </td>
+
+  <td class="right">
+    <%= number_with_delimiter(number_with_precision(deal.price * deal.amount, precision: 0), delimiter: ',') %>
+  </td>
+
+  <td class="center">
+    <a href="<%= announcement_path(deal.announcements.first) %>">
+      <%= get_announcement_role_th(deal.announcements.first.role) %>
+      <small>#<%= deal.announcements.first.id %></small>
+    </a>
+  </td>
+
+  <td class="center">
+    <%= I18n.localize(deal.expire, format: :long) %>
+  </td>
+
+  <td class="center">
+    <% if deal.expire >= Time.now || deal.status != "wait" %>
+      <%= show_deal_status(deal) %>
+    <% else %>
+      <p style="color: red;">หมดอายุแล้ว</p>
+    <% end %>
+  </td>
+
+  <td>
+    <div class="center">
+      <%= link_to 'ดูข้อมูล', deal %>
+      <% if current_user.admin? %>
+        <br><%= link_to 'ลบข้อเสนอ', deal, method: :delete, data: {confirm: "แน่ใจหรือไม่ว่าต้องการลบข้อเสนอ?"} %>
+      <% end %>
+    </div>
+  </td>
+
+</tr>

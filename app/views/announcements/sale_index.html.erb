@@ -1,0 +1,16 @@
+<div class="container">
+
+  <%= generate_breadcrumb({
+      "ผู้ดูแลระบบ": admin_menu_path,
+      "ระบบประกาศขายอ้อย": "active"
+    }) %>
+
+  <div class="page-header">
+    <h1>ระบบประกาศขายอ้อย<small> รวม <%= @announcements.count %> ประกาศ</small></h1>
+  </div>
+
+  <%= render partial: "table_index", locals: {announcements: @announcements} %>
+
+  <%= will_paginate @announcements, class: "center" %>
+
+</div>

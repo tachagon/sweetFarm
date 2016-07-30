@@ -1,1 +1,23 @@
-<%= link_to 'All User', users_path(locale: I18n.locale) %>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>ผู้ดูแลระบบ</h1>
+  </div>
+
+  <ul class="nav nav-pills nav-stacked">
+    <li role="presentation">
+      <%= link_to 'ระบบผู้ใช้', users_path(locale: I18n.locale) %>
+    </li>
+    <li role="presentation">
+      <%= link_to 'ระบบประกาศซื้ออ้อย', announcements_purchase_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to 'ระบบประกาศขายอ้อย', announcements_sale_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to 'ระบบข้อเสนอ', deals_admin_path %>
+    </li>
+  </ul>
+
+</div>

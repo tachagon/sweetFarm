@@ -1,0 +1,29 @@
+<div class="container">
+  <%= generate_breadcrumb({"ผู้ดูแลระบบ": admin_menu_path, "ระบบข้อเสนอ": "active"}) %>
+
+  <div class="page-header">
+    <h1>ระบบข้อเสนอ<small> รวม <%= @deals.count %> ข้อเสนอ</small>
+    </h1>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered table-striped">
+      <tr>
+        <th class="center">ID</th>
+        <th class="center">จำนวน (ตัน)</th>
+        <th class="center">ราคา (บาท/ตัน)</th>
+        <th class="center">ราคารวม</th>
+        <th class="center">ประกาศ</th>
+        <th class="center">สิ้นสุด</th>
+        <th class="center">สถานะ</th>
+        <th class="center"></th>
+      </tr>
+      <% @deals.each do |deal| %>
+        <%= render partial: "tr_deal", locals: {deal: deal} %>
+      <% end %>
+    </table>
+  </div>
+
+  <%= will_paginate @deals, class: "center" %>
+
+</div>

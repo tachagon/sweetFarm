@@ -16,6 +16,7 @@ gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'font-awesome-rails'
 gem 'select2-rails'
+gem 'chart-js-rails'
 
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
@@ -74,4 +75,4 @@ group :production do
   gem 'rails_12factor', '0.0.2'
 end
 
-gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
+# gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"

@@ -1,27 +1,46 @@
-<div class="table-responsive">
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>role</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td>
-      <%= form_tag(user_update_role_path(user, locale: I18n.locale), method: :post) do %>
+<div class="container">
 
-        <%= select_tag :role, options_for_select(['user', 'cane_planter', 'head_cane_planter', 'factory'], user.role) %>
-        <%= submit_tag 'Edit Role' %>
+  <%= generate_breadcrumb({
+      "ผู้ดูแลระบบ": admin_menu_path,
+      "ระบบผู้ใช้": "active"
+    }) %>
 
-      <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="page-header">
+    <h1>ระบบผู้ใช้<small> รวม <%= @users.count %> ผู้ใช้งาน</small></h1>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>ชื่อ</th>
+          <th>อีเมล</th>
+          <th>บทบาท</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+          <%= form_tag(user_update_role_path(user, locale: I18n.locale), method: :post) do %>
+
+            <%= select_tag :role, options_for_select(['user', 'cane_planter', 'head_cane_planter', 'factory'], user.role) %>
+            <%= submit_tag 'แก้ไขบทบาท' %>
+
+          <% end %>
+          </td>
+          <td>
+            <%= link_to 'ลบผู้ใช้', user, method: :delete, data: {confirm: "แน่ใจหรือไม่ว่าต้องการลบผู้ใช้?"} %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= will_paginate @users, class: "center" %>
+
 </div>

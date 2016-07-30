@@ -22,16 +22,27 @@ Rails.application.routes.draw do
 
       get 'announcements' => 'announcements#user_announcements', :as => 'announcements'
       get 'announcements/:announcement_role' => 'announcements#user_announcements_role', :as => 'announcements_role'
+
+      get 'send_deals' => 'deals#user_send_deals'
+      get 'receive_deals' => 'deals#user_receive_deals'
     end
 
     resources :announcements
+    get 'announcements/purchase/index' => 'announcements#purchase_index', as: 'announcements_purchase'
+    get 'announcements/sale/index' => 'announcements#sale_index', as: 'announcements_sale'
+
     resources :deals, only: [:index, :show, :create, :destroy] do
       patch 'update_status_decline_accepted' => 'deals#update_status_decline_accepted'
       patch 'update_status_paid' => 'deals#update_status_paid'
       patch 'update_status_shipped' => 'deals#update_status_shipped'
       resources :messages, only: [:index, :create]
     end
+    get 'deals/admin/index' => 'deals#admin_index', as: 'deals_admin'
+
     resources :reviews, only: [:create]
+
+    get 'analytics' => 'analytics#index'
+    get 'announcement/analytics/' => 'analytics#announcement_analytics', as: "announcement_analytics"
 
   # end
   # resources :users

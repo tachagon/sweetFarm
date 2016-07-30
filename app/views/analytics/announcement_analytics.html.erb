@@ -1,0 +1,75 @@
+<% provide(:title, "วิเคราะห์ข้อมูล #{@last_days} วัน") %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= render partial: "last_days_form" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div class="col-sm-4 col-sm-offset-2">
+          <%= render partial: "all_announcements_chart", locals: {announcements: @announcements} %>
+        </div>
+
+        <div class="col-sm-4">
+          <%= render partial: "all_announcements_panel", locals: {announcements: @announcements} %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div class="col-sm-5 col-sm-offset-1">
+          <%= render partial: "sum_amount_chart_purchase", locals: {announcements: @announcements.role("purchase"), last_days: @last_days} %>
+        </div>
+
+        <div class="col-sm-5">
+          <%= render partial: "sum_amount_chart_sale", locals: {announcements: @announcements.role("sale"), last_days: @last_days} %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div class="col-sm-5 col-sm-offset-1">
+          <%= render partial: "avg_price_chart_purchase", locals: {announcements: @announcements.role("purchase"), last_days: @last_days} %>
+        </div>
+
+        <div class="col-sm-5">
+          <%= render partial: "avg_price_chart_sale", locals: {announcements: @announcements.role("sale"), last_days: @last_days} %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div class="col-sm-4 col-sm-offset-2">
+          <%= render partial: "deal_price_chart", locals: {deals: @deals_hash} %>
+        </div>
+
+        <div class="col-sm-4">
+          <%= render partial: "suggestion_price_panel", locals: {deals: @deals, deals_hash: @deals_hash} %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

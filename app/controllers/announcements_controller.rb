@@ -4,7 +4,7 @@ class AnnouncementsController < ApplicationController
   before_action :set_announcement_obj, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :correct_user_id, only: [:user_announcements, :user_announcements_role]
-  before_action :admin_user, only: [:destroy]
+  before_action :admin_user, only: [:destroy, :purchase_index, :sale_index]
 
   def index
     @announcements = Announcement.show.not_expired.recent
@@ -17,6 +17,14 @@ class AnnouncementsController < ApplicationController
       format.json{render json: @announcements}
       format.xml{render xml: @announcements}
     end
+  end
+
+  def purchase_index
+    @announcements = Announcement.recent.role("purchase").paginate(page: params[:page], per_page: 15)
+  end
+
+  def sale_index
+    @announcements = Announcement.recent.role("sale").paginate(page: params[:page], per_page: 15)
   end
 
   def user_announcements
@@ -86,7 +94,7 @@ class AnnouncementsController < ApplicationController
   def destroy
     Announcement.find_by_id(params[:id]).destroy
     flash[:success] = 'ลบประกาศแล้ว'
-    redirect_to admin_all_announcements_path
+    redirect_to :back
   end
 
   private

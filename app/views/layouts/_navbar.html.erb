@@ -34,6 +34,18 @@
             </ul>
           </li>
 
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle='dropdown'>ข้อเสนอ <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'ข้อเสนอที่ส่ง', user_send_deals_path(user_id: current_user) %></li>
+              <li><%= link_to 'ข้อเสนอที่ได้รับ', user_receive_deals_path(user_id: current_user) %></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="<%= announcement_analytics_path(last_days: 7) %>">วิเคราะห์ข้อมูล</a>
+          </li>
+
         </ul>
 
       <% end %>
@@ -61,9 +73,9 @@
                 </a>
               </li>
 
-              <li>
-                <a href="<%= settings_path %>"><i class="fa fa-cog"></i> <%= t('settings') %></a>
-              </li>
+              <!-- <li>
+                <a href="<%#= settings_path %>"><i class="fa fa-cog"></i> <%#= t('settings') %></a>
+              </li> -->
 
               <% if current_user.admin? %>
                 <li>

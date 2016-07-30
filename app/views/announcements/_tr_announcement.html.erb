@@ -13,19 +13,19 @@
   </td>
 
   <td class="center">
-    <%= image_tag announcement.cane_picture, style: "height: 100px; width: 161px;" %>
+    <%= image_tag announcement.cane_picture, style: "height: 100px; width: auto;" %>
   </td>
 
   <td class="right">
-    <%= number_with_delimiter(number_with_precision(announcement.amount, precision: 3), delimiter: ',') %>
+    <%= number_with_delimiter(number_with_precision(announcement.amount, precision: 0), delimiter: ',') %>
   </td>
 
   <td class="right">
-    <%= number_with_delimiter(number_with_precision(announcement.price, precision: 2), delimiter: ',') %>
+    <%= number_with_delimiter(number_with_precision(announcement.price, precision: 0), delimiter: ',') %>
   </td>
 
   <td class="right">
-    <%= number_with_delimiter(number_with_precision(announcement.price * announcement.amount, precision: 2), delimiter: ',') %>
+    <%= number_with_delimiter(number_with_precision(announcement.price * announcement.amount, precision: 0), delimiter: ',') %>
   </td>
 
   <td class="center">
@@ -55,6 +55,9 @@
   <td>
     <div class="center">
       <%= link_to 'ดูข้อมูล', announcement %>
+      <% if current_user.admin? %>
+        <br><%= link_to 'ลบประกาศ', announcement, method: :delete, data: {confirm: "แน่ใจหรือไม่ว่าต้องการลบประกาศ?"} %>
+      <% end %>
     </div>
   </td>
 

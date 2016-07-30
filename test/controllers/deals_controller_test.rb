@@ -14,6 +14,15 @@ class DealsControllerTest < ActionController::TestCase
     @deal_completed_1 = deals(:deal_completed_1)
     @announcement = announcements(:announcement_sale_1)
     @user_announcement = announcements(:announcement_purchase_1)
+
+    @new_announcement = Announcement.create!(
+      amount: 50,
+      price: 899,
+      role: "sale",
+      expire: Time.now + 7.days,
+      user: @admin,
+      district: districts(:banmai)
+    )
   end
 
   #=============================================================
@@ -103,11 +112,11 @@ class DealsControllerTest < ActionController::TestCase
     log_in_as(@user)
     assert_no_difference "Deal.count" do
       assert_no_difference "Attraction.count" do
-        post :create, deal: {amount: -1, price: 'invalid'}, announcement_id: @announcement.id
+        post :create, deal: {amount: -1, price: 'invalid'}, announcement_id: @new_announcement.id
       end
     end
     assert_not flash.empty?
-    assert_redirected_to announcement_url(@announcement)
+    assert_redirected_to announcement_url(@new_announcement)
   end
 
   test "should redirect create when announcement_id invalid" do
@@ -146,10 +155,10 @@ class DealsControllerTest < ActionController::TestCase
     log_in_as(@user)
     assert_difference "Deal.count", 1 do
       assert_difference "Attraction.count", 1 do
-        post :create, deal: {amount: @announcement.amount, price: 800}, announcement_id: @announcement.id
+        post :create, deal: {amount: @new_announcement.amount, price: 800}, announcement_id: @new_announcement.id
       end
     end
-    assert_redirected_to announcement_url(@announcement)
+    assert_redirected_to announcement_url(@new_announcement)
   end
 
   #=============================================================

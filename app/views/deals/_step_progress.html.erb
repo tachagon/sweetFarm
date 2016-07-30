@@ -57,9 +57,11 @@
           รับข้อเสนอ
         <% end %>
       </h3>
-      <% if deal.user != @current_user %>
+      <% if deal.user != @current_user && deal.expire >= Time.now %>
         <a href="<%= deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "decline") %>" data-confirm="คุณต้องการปฏิเสธข้อเสนอ?" data-method="patch" rel="nofollow" class="btn btn-danger col-sm-3 col-sm-offset-3" title="ปฏิเสธข้อเสนอ">ปฏิเสธ</a>
         <a href="<%= deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "accepted") %>", data-method="patch" rel="nofollow" class="btn btn-success btn-lg col-sm-3" title="รับข้อเสนอ">ตกลง</a>
+      <% elsif deal.expire < Time.now %>
+        <p style="color: red">ข้อเสนอหมดอายุแล้ว</p>
       <% end %>
     </div>
   </div>
@@ -86,9 +88,10 @@
         <% end %>
       </h3>
       <% if is_purchaser?(deal, @current_user) %>
-        <a href="<%= deal_update_status_paid_path(deal_id: deal, "deal[status]": "paid") %>" data-method="patch" rel="nofollow" class="btn btn-info" title="ชำระเงิน">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#paidModal">
           ชำระเงิน
-        </a>
+        </button>
+        <%= render partial: "step_paid_modal", locals: {deal: deal} %>
       <% end %>
     </div>
   </div>

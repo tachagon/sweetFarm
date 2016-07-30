@@ -26,11 +26,11 @@
 
         <div class="table-responsive">
           <table class="table table-hover">
-            <tr>
+            <!-- <tr>
               <th>จำนวน</th>
-              <td><%= number_with_delimiter(deal.amount, delimiter: ',') %></td>
+              <td><%#= number_with_delimiter(deal.amount, delimiter: ',') %></td>
               <td>ตัน</td>
-            </tr>
+            </tr> -->
             <tr>
               <th>ราคา</th>
               <td><%= number_with_delimiter(deal.price, delimiter: ',') %></td>
@@ -63,7 +63,7 @@
                 <%= link_to "ปฏิเสธ", deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "decline"), method: :patch, data: {confirm: "คุณต้องการปฏิเสธข้อเสนอ?"}, class: 'btn btn-danger btn-block' %>
               </div>
               <div class="col-sm-6 col-md-6">
-                <%= link_to 'ตกลง', deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "accepted"), method: :patch, class: "btn btn-success btn-block btn-lg" %>
+                <%= link_to 'ตกลง', deal_update_status_decline_accepted_path(deal_id: deal, "deal[status]": "accepted"), method: :patch, class: "btn btn-success btn-block btn-lg", data: {confirm: "เมื่อรับข้อเสนอนี้แล้ว ข้อเสนออื่นจะถูกปฏิเสธทั้งหมด"} %>
               </div>
             </div>
 

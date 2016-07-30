@@ -23,6 +23,7 @@ module DealsHelper
       color = "green"
     elsif deal.status == "completed"
       word = "ซื้อขายสำเร็จแล้ว"
+      color = "green"
     end
     content_tag(:p, word, style: "color: #{color};", class: "center")
   end
@@ -67,6 +68,19 @@ module DealsHelper
       return true if review.reviewer == user
     end
     return false
+  end
+
+  # if user accepted a deal
+  # then status of other deals of same announcement should be decline
+  def decline_others_deal(announcements, deal_accepted_id)
+    announcements.each do |announcement|
+      announcement.deals.each do |deal|
+        if deal.id != deal_accepted_id
+          deal.status = 'decline'
+          deal.save
+        end
+      end
+    end
   end
 
 end

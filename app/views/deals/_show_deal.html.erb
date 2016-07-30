@@ -48,7 +48,13 @@
           </table>
         </div>
 
-          <%= show_deal_status(deal) %>
+          <div class="center">
+            <% if deal.expire >= Time.now || deal.status != "wait" %>
+              <%= show_deal_status(deal) %>
+            <% else %>
+              <p style="color: red;">หมดอายุแล้ว</p>
+            <% end %>
+          </div>
 
       </div>
       <!-- ./media-body -->

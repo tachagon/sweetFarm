@@ -14,35 +14,32 @@
 <% if logged_in? %>
   <style type="text/css" media="screen">
     body {
-      padding-top: 50px;
+      padding-top: 55px;
     }
   </style>
   <%= render 'layouts/navbar' %>
 <% end %>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
+
     <% flash.each do |message_type, message| %>
 
-      <div class="alert alert-<%= message_type %> alert-dismissible">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 alert alert-<%= message_type %> alert-dismissible" style="position: absolute;">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
         <%= message %>
       </div>
     <% end %>
-  </div>
-</div>
 
-<div class="container-fluid">
-  <div class="row">
     <%= yield %>
   </div>
 </div>
 
 <div class="container">
 	<div class="row">
-		<%= debug(params) if Rails.env.development? %>
+		<%#= debug(params) if Rails.env.development? %>
 	</div>
 </div>
 

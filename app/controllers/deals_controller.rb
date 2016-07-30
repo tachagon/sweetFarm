@@ -1,5 +1,6 @@
 class DealsController < ApplicationController
   include DealsHelper
+  include AnnouncementsHelper
 
   before_action :logged_in_user
   before_action :get_deal, only: [:show, :destroy, :update_status_decline_accepted, :update_status_paid, :update_status_shipped]
@@ -16,6 +17,37 @@ class DealsController < ApplicationController
       format.html
       format.json{render json: @deals}
       format.xml{render xml: @deals}
+    end
+  end
+
+  def admin_index
+    @deals = Deal.recent.paginate(page: params[:page], per_page: 15)
+  end
+
+  def user_send_deals
+    @user = User.find_by_id(params[:user_id])
+    @deals = @user.deals.recent.recent.paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.json{render json: @deals}
+    end
+  end
+
+  def user_receive_deals
+    @user = User.find_by_id(params[:user_id])
+    @announcements = @user.announcements.recent
+
+    @deals = @announcements.first.deals
+    @announcements.each do |announcement|
+      @deals += announcement.deals
+    end
+
+    @num_deals = @deals.count
+    @deals = @deals.paginate(page: params[:page], per_page: 10)
+
+    respond_to do |format|
+      format.html
+      format.json{render json: @deals}
     end
   end
 
@@ -38,6 +70,7 @@ class DealsController < ApplicationController
 
     redirect_to announcement_path(@announcement) and return if @announcement.user == current_user || @announcement.expire < Time.now
     redirect_to announcement_path(@announcement) and return if params[:deal][:amount].to_f > @announcement.amount
+    redirect_to announcement_path(@announcement) and return if accept_announcement?(@announcement)
 
     if @deal.save
       @deal.reload
@@ -54,14 +87,18 @@ class DealsController < ApplicationController
   def destroy
     @deal.destroy
     flash[:success] = 'ลบข้อเสนอสำเร็จแล้ว'
-    redirect_to admin_all_deals_path
+    redirect_to deals_admin_path
   end
 
   def update_status_decline_accepted
     if @deal.expire >= Time.now && @deal.status == 'wait' && @deal.update_attributes(deal_status_params)
       @deal.reload
-      flash[:success] = "รับข้อเสนอแล้ว" if @deal.status == "accepted"
-      flash[:success] = 'ปฏิเสธข้อเสนอแล้ว' if @deal.status == "decline"
+      if @deal.status == "accepted"
+        flash[:success] = "รับข้อเสนอแล้ว"
+        decline_others_deal(@deal.announcements, @deal.id)
+      elsif @deal.status == "decline"
+        flash[:success] = 'ปฏิเสธข้อเสนอแล้ว'
+      end
       redirect_to deal_path(@deal)
     else
       flash[:danger] = 'ไม่สามารถดำเนินการได้'
