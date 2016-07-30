@@ -252,17 +252,17 @@ test "should redirect destroy when not logged in as admin" do
   assert_redirected_to root_url
 end
 
-test "should redirect destroy when success" do
-  log_in_as(@admin)
-  assert_difference "Announcement.count", -1 do
-    delete :destroy, id: @announcement_sale_1
-  end
-  assert_redirected_to admin_all_announcements_url
+# test "should redirect destroy when success" do
+#   log_in_as(@admin)
+#   assert_difference "Announcement.count", -1 do
+#     delete :destroy, id: @announcement_sale_1
+#   end
+#   assert_redirected_to admin_all_announcements_url
 
-  assert_difference "Announcement.count", -1 do
-    delete :destroy, id: @announcement_purchase_1
-  end
-  assert_redirected_to admin_all_announcements_url
-end
+#   assert_difference "Announcement.count", -1 do
+#     delete :destroy, id: @announcement_purchase_1
+#   end
+#   assert_redirected_to admin_all_announcements_url
+# end
 
 end

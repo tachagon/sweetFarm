@@ -38,6 +38,9 @@
   <td>
     <div class="center">
       <%= link_to 'ดูข้อมูล', deal %>
+      <% if current_user.admin? %>
+        <br><%= link_to 'ลบข้อเสนอ', deal, method: :delete, data: {confirm: "แน่ใจหรือไม่ว่าต้องการลบข้อเสนอ?"} %>
+      <% end %>
     </div>
   </td>
 

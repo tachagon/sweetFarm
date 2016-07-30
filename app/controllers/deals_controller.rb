@@ -20,6 +20,10 @@ class DealsController < ApplicationController
     end
   end
 
+  def admin_index
+    @deals = Deal.recent.paginate(page: params[:page], per_page: 15)
+  end
+
   def user_send_deals
     @user = User.find_by_id(params[:user_id])
     @deals = @user.deals.recent.recent.paginate(page: params[:page], per_page: 10)
@@ -83,7 +87,7 @@ class DealsController < ApplicationController
   def destroy
     @deal.destroy
     flash[:success] = 'ลบข้อเสนอสำเร็จแล้ว'
-    redirect_to admin_all_deals_path
+    redirect_to deals_admin_path
   end
 
   def update_status_decline_accepted

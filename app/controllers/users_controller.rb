@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: [:index, :destroy, :update_role]
 
   def index
-    @users = User.all
+    @users = User.all.paginate(page: params[:page], per_page: 15)
   end
 
   def show
@@ -61,7 +61,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-
+    User.find_by_id(params[:id]).destroy
+    flash[:success] = 'ลบผู้ใช้แล้ว'
+    redirect_to users_path
   end
 
   private

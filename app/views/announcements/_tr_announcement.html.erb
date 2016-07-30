@@ -55,6 +55,9 @@
   <td>
     <div class="center">
       <%= link_to 'ดูข้อมูล', announcement %>
+      <% if current_user.admin? %>
+        <br><%= link_to 'ลบประกาศ', announcement, method: :delete, data: {confirm: "แน่ใจหรือไม่ว่าต้องการลบประกาศ?"} %>
+      <% end %>
     </div>
   </td>
 
